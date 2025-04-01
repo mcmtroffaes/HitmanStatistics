@@ -11,10 +11,10 @@ namespace HitmanStatistics {
 
         // Most values are accessed with 3-levels pointers and the second offset is different depending on the current mission.
         // All second offsets are stored here to be accessed according to the correct mission.
-        readonly int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
+        readonly static int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
 
         // Dictionary used to convert the raw map names into easily readable names and a map number to access the second offsets declared previously.
-        readonly Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>() {
+        readonly static Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>() {
             // Hitman 2
             { "C1-1__MA", new Tuple<string, int>("Anathema", 1) },
             { "C2-1__MA", new Tuple<string, int>("St. Petersburg Stakeout", 2) },
@@ -52,7 +52,7 @@ namespace HitmanStatistics {
         };
 
         // Map pointers for HC
-        readonly Pointer[] HCmapPointers = {
+        readonly static Pointer[] HCmapPointers = {
             new Pointer(0x00393D58, new int[2] { 0x234, 0xBDE }),
             new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }),
             new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }),
@@ -66,7 +66,7 @@ namespace HitmanStatistics {
             new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })
         };
 
-        // Other variables.
+        // State variables.
         int myHandle, gameNumber, HCpointerNumber;
         bool isSilentAssassin;
 
@@ -75,9 +75,9 @@ namespace HitmanStatistics {
         ------------------*/
         public FormMain() {
             InitializeComponent();
-            HCpointerNumber = 0;
-            gameNumber = 2;
             myHandle = 0;
+            gameNumber = 2;
+            HCpointerNumber = 0;
             isSilentAssassin = true;  // keep track to avoid overwriting image which causes "glitch"
         }
 
