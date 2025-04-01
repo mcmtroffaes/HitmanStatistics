@@ -130,7 +130,6 @@ namespace HitmanStatistics {
                 }
                 if (mapValues.ContainsKey(mapKey)) {
                     // A mission is currently active, ready to read memory
-                    // Get the clean mission name and the mission number from the dictionary
                     string mapName = mapValues[mapKey].Item1;
                     int mapNumber = mapValues[mapKey].Item2;
                     float missionTime = 0;
@@ -138,10 +137,7 @@ namespace HitmanStatistics {
                     switch (gameNumber)
                     {
                         case 2:
-                            // Reading the timer
                             missionTime = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C58, new int[5] { 0x118, 0xB38, 0x8, 0x1084, 0x24 });
-
-                            // Reading every other value if the mission has started
                             if (missionTime > 0)
                             {
                                 stats = new Statistics(
@@ -157,10 +153,7 @@ namespace HitmanStatistics {
                             }
                             break;
                         case 3:
-                            // Reading the timer
                             missionTime = Trainer.ReadPointerFloat(myHandle, baseAddress + 0x39457C, new int[1] { 0x24 });
-
-                            // Reading every other value if the mission has started
                             if (missionTime > 0)
                             {
                                 stats = new Statistics(
@@ -176,15 +169,11 @@ namespace HitmanStatistics {
                             }
                             break;
                     }
-
-                    // Checking if the actual rating is SA according to the current stats
-                    if (!stats.IsSilentAssassin(gameNumber, mapNumber))
+                    if (!SilentAssassin.IsSilentAssassin(gameNumber, mapNumber, stats))
                     {
                         IMG_SA.BackgroundImage = Properties.Resources.No;
                         LB_SilentAssassin.ForeColor = Color.Red;
                     }
-
-                    // Displaying the values
                     LB_MapName.Text = "#" + mapNumber + " " + mapName;
                     LB_Time.Text = TimeSpan.FromSeconds(missionTime / 60).ToString(@"mm\:ss\.f");
                     NB_ShotsFired.Text = stats.nbShotsFired.ToString();
@@ -199,9 +188,7 @@ namespace HitmanStatistics {
                 else {
                     // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment
                     // The current screen is something like the main menu, the briefing or a cutscene
-                    // Resetting values
                     ResetValues();
-
                     // Change the map pointer for Contracts, because I'm not sure which one is working at the moment
                     // TODO: Find a working pointer
                     HCpointerNumber++;
