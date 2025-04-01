@@ -109,7 +109,6 @@ namespace HitmanStatistics {
             new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }), new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })};
 
         // Other variables.
-        System.Text.Encoding enc = System.Text.Encoding.UTF8;
         private readonly Image imgSA;
         private readonly Image imgNotSA;
         int myHandle;
