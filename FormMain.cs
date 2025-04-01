@@ -9,58 +9,6 @@ namespace HitmanStatistics {
         // Base address value for pointers.
         const int baseAddress = 0x00400000;
 
-        // All the possible Silent Assassin combinations for Hitman 2
-        readonly SACombination[] validSACombinationH2 = {
-            new SACombination(0, 1, 0, 0, 1, 2, 0, 0),
-            new SACombination(0, 1, 0, 0, 0, 5, 0, 0),
-            new SACombination(0, 1, 0, 0, 0, 2, 0, 1),
-            new SACombination(0, 0, 0, 1, 2, 0, 0, 0),
-            new SACombination(0, 0, 0, 1, 1, 3, 0, 0), 
-            new SACombination(0, 0, 0, 1, 1, 0, 0, 1),
-            new SACombination(0, 0, 0, 1, 0, 6, 0, 0),
-            new SACombination(0, 0, 0, 1, 0, 3, 0, 1),
-            new SACombination(0, 0, 0, 1, 0, 0, 1, 0),
-            new SACombination(0, 0, 0, 1, 0, 0, 0, 2), 
-            new SACombination(0, 0, 0, 0, 1, 0, 0, 1),
-            new SACombination(1, 1, 1, 0, 0, 2, 0, 0),
-            new SACombination(1, 1, 0, 0, 1, 0, 0, 0),
-            new SACombination(1, 1, 0, 0, 0, 3, 0, 0),
-            new SACombination(1, 1, 0, 0, 0, 0, 0, 1),
-            new SACombination(1, 0, 1, 1, 1, 0, 0, 0),
-            new SACombination(1, 0, 1, 1, 0, 3, 0, 0),
-            new SACombination(1, 0, 1, 1, 0, 0, 0, 1),
-            new SACombination(1, 0, 0, 1, 1, 1, 0, 0),
-            new SACombination(1, 0, 0, 1, 0, 4, 0, 0),
-            new SACombination(1, 0, 0, 1, 0, 1, 0, 1),
-            new SACombination(1, 0, 0, 0, 1, 1, 0, 0),
-            new SACombination(2, 1, 1, 0, 0, 0, 0, 0),
-            new SACombination(2, 1, 0, 0, 0, 1, 0, 0),
-            new SACombination(2, 0, 2, 1, 0, 0, 0, 0),
-            new SACombination(2, 0, 1, 1, 0, 1, 0, 0),
-            new SACombination(3, 0, 0, 1, 0, 0, 0, 0)
-        };
-
-        // All the possible Silent Assassin combinations for Hitman Contracts
-        readonly SACombination[] validSACombinationHC = {
-            new SACombination(999, 0, 999, 1, 0, 0, 0, 0),
-            new SACombination(2, 1, 1, 0, 0, 0, 0, 0),
-            new SACombination(2, 1, 0, 0, 0, 1, 0, 0),
-            new SACombination(2, 0, 1, 1, 0, 1, 0, 0),
-            new SACombination(2, 0, 0, 0, 0, 2, 0, 0),
-            new SACombination(1, 1, 1, 0, 0, 2, 0, 0),
-            new SACombination(1, 1, 0, 0, 1, 0, 0, 0),
-            new SACombination(1, 1, 0, 0, 0, 3, 0, 0),
-            new SACombination(1, 0, 1, 1, 1, 0, 0, 0),
-            new SACombination(1, 0, 1, 1, 0, 3, 0, 0),
-            new SACombination(1, 0, 0, 1, 1, 1, 0, 0),
-            new SACombination(1, 0, 0, 1, 0, 4, 0, 0),
-            new SACombination(0, 1, 0, 0, 1, 2, 0, 0),
-            new SACombination(0, 1, 0, 0, 0, 5, 0, 0),
-            new SACombination(0, 0, 0, 1, 1, 3, 0, 0),
-            new SACombination(0, 0, 0, 1, 2, 0, 0, 0),
-            new SACombination(0, 0, 0, 1, 0, 6, 0, 0)
-        };
-
         // Most values are accessed with 3-levels pointers and the second offset is different depending on the current mission.
         // All second offsets are stored here to be accessed according to the correct mission.
         readonly int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
@@ -112,8 +60,7 @@ namespace HitmanStatistics {
         private readonly Image imgSA;
         private readonly Image imgNotSA;
         int myHandle;
-        string mapName;
-        int gameNumber, mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, HCpointerNumber;
+        int gameNumber, HCpointerNumber;
 
         /*------------------
         -- INITIALIZATION --
@@ -125,7 +72,6 @@ namespace HitmanStatistics {
             HCpointerNumber = 0;
             gameNumber = 2;
             myHandle = 0;
-            ResetValues();
         }
 
         /*------------------
@@ -179,10 +125,11 @@ namespace HitmanStatistics {
                 }
                 if (mapValues.ContainsKey(mapBytesStr)) {
                     // Get the clean mission name and the mission number from the dictionary
-                    mapName = mapValues[mapBytesStr].Item1;
-                    mapNumber = mapValues[mapBytesStr].Item2;
+                    string mapName = mapValues[mapBytesStr].Item1;
+                    int mapNumber = mapValues[mapBytesStr].Item2;
                     // A mission is currently active, ready to read memory
                     float missionTime = 0;
+                    Statistics stats = new Statistics(0, 0, 0, 0, 0, 0, 0, 0);
                     switch (gameNumber)
                     {
                         case 2:
@@ -192,14 +139,16 @@ namespace HitmanStatistics {
                             // Reading every other value if the mission has started
                             if (missionTime > 0)
                             {
-                                nbShotsFired = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
-                                nbCloseEncounters = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
-                                nbHeadshots = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
-                                nbAlerts = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C });
-                                nbEnemiesK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 });
-                                nbEnemiesH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C });
-                                nbInnocentsK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 });
-                                nbInnocentsH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
+                                stats = new Statistics(
+                                    sf: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 }),
+                                    ce: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 }),
+                                    hs: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 }),
+                                    al: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C }),
+                                    ek: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 }),
+                                    eh: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C }),
+                                    ik: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 }),
+                                    ih: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 })
+                                );
                             }
                             break;
                         case 3:
@@ -209,20 +158,22 @@ namespace HitmanStatistics {
                             // Reading every other value if the mission has started
                             if (missionTime > 0)
                             {
-                                nbShotsFired = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F });
-                                nbCloseEncounters = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2F });
-                                nbHeadshots = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB17 });
-                                nbAlerts = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2B });
-                                nbEnemiesK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1F });
-                                nbEnemiesH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1B });
-                                nbInnocentsK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB27 });
-                                nbInnocentsH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB23 });
+                                stats = new Statistics(
+                                    sf: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F }),
+                                    ce: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2F }),
+                                    hs: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB17 }),
+                                    al: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2B }),
+                                    ek: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1F }),
+                                    eh: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1B }),
+                                    ik: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB27 }),
+                                    ih: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB23 })
+                                );
                             }
                             break;
                     }
 
                     // Checking if the actual rating is SA according to the current stats
-                    if (IsSilentAssassin())
+                    if (stats.IsSilentAssassin(gameNumber, mapNumber))
                     {
                         IMG_SA.BackgroundImage = imgSA;
                         LB_SilentAssassin.ForeColor = Color.Green;
@@ -236,19 +187,19 @@ namespace HitmanStatistics {
                     // Displaying the values
                     LB_MapName.Text = "#" + mapNumber + " " + mapName;
                     LB_Time.Text = TimeSpan.FromSeconds(missionTime / 60).ToString(@"mm\:ss\.f");
-                    NB_ShotsFired.Text = nbShotsFired.ToString();
-                    NB_CloseEncounters.Text = nbCloseEncounters.ToString();
-                    NB_Headshots.Text = nbHeadshots.ToString();
-                    NB_Alerts.Text = nbAlerts.ToString();
-                    NB_EnemiesKilled.Text = nbEnemiesK.ToString();
-                    NB_EnemiesHarmed.Text = nbEnemiesH.ToString();
-                    NB_InnocentsKilled.Text = nbInnocentsK.ToString();
-                    NB_InnocentsHarmed.Text = nbInnocentsH.ToString();
+                    NB_ShotsFired.Text = stats.nbShotsFired.ToString();
+                    NB_CloseEncounters.Text = stats.nbCloseEncounters.ToString();
+                    NB_Headshots.Text = stats.nbHeadshots.ToString();
+                    NB_Alerts.Text = stats.nbAlerts.ToString();
+                    NB_EnemiesKilled.Text = stats.nbEnemiesK.ToString();
+                    NB_EnemiesHarmed.Text = stats.nbEnemiesH.ToString();
+                    NB_InnocentsKilled.Text = stats.nbInnocentsK.ToString();
+                    NB_InnocentsHarmed.Text = stats.nbInnocentsH.ToString();
                 }
                 else {
                     // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment
                     // The current screen is something like the main menu, the briefing or a cutscene
-                    // No mission is active, resetting values
+                    // Resetting values
                     ResetValues();
 
                     // Change the map pointer for Contracts, because I'm not sure which one is working at the moment
@@ -264,50 +215,19 @@ namespace HitmanStatistics {
         private void ResetValues() {
             LB_MapName.Text = "No Mission Active";
             LB_Time.Text = "00:00.0";
-            nbShotsFired = 0;
             NB_ShotsFired.Text = "0";
-            nbCloseEncounters = 0;
             NB_CloseEncounters.Text = "0";
-            nbHeadshots = 0;
             NB_Headshots.Text = "0";
-            nbAlerts = 0;
             NB_Alerts.Text = "0";
-            nbEnemiesK = 0;
             NB_EnemiesKilled.Text = "0";
-            nbEnemiesH = 0;
             NB_EnemiesHarmed.Text = "0";
-            nbInnocentsK = 0;
             NB_InnocentsKilled.Text = "0";
-            nbInnocentsH = 0;
             NB_InnocentsHarmed.Text = "0";
 
             if (IMG_SA.BackgroundImage != imgSA) {
                 IMG_SA.BackgroundImage = imgSA;
                 LB_SilentAssassin.ForeColor = Color.Green;
             }
-        }
-
-        // Used to check if the actual rating is Silent Assassin
-        private bool IsSilentAssassin() {
-            SACombination[] validSACombination = null;
-            switch (gameNumber) {
-                case 2:
-                    validSACombination = validSACombinationH2;
-                    break;
-                case 3:
-                    if (mapName == "Asylum Aftermath" && nbCloseEncounters > 0)
-                        return false;
-                    validSACombination = validSACombinationHC;
-                    break;
-            }
-            // Checking every possible SA combination
-            foreach (SACombination combination in validSACombination) {
-                // If all the current values are equal or inferior to a valid combination, the rating is SA
-                if (combination.isSACombination(nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH)) {
-                    return true;
-                }
-            }
-            return false;
         }
 
         // Open a web page to the latest version of the tracker
