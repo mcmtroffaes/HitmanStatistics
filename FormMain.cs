@@ -112,8 +112,8 @@ namespace HitmanStatistics {
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         private readonly Image imgSA;
         private readonly Image imgNotSA;
-        Process[] myProcess;
-        String mapName;
+        int myHandle;
+        string mapName;
         float missionTime;
         bool isMissionActive;
         string gameName;
@@ -137,37 +137,37 @@ namespace HitmanStatistics {
         ------------------*/
         private void Timer_Tick(object sender, EventArgs e) {
             // Attempt to find if the game is currently running
-            if (myProcess == null || myProcess.Length == 0) {
-                switch (gameNumber) {
+            if (myHandle == 0) {
+                switch (gameNumber)
+                {
                     case 2:
-                        myProcess = Process.GetProcessesByName("hitman2");
+                        myHandle = Trainer.OpenProcessHandle("hitman2");
                         break;
                     case 3:
-                        myProcess = Process.GetProcessesByName("HitmanContracts");
+                        myHandle = Trainer.OpenProcessHandle("HitmanContracts");
                         break;
                 }
-
-                if (myProcess.Length != 0) {
+                if (myHandle != 0)
+                {
                     LB_Running.Text = gameName + " IS RUNNING";
                     LB_Running.ForeColor = Color.Green;
                     Timer.Interval = 50;
                 }
             }
 
-            if (myProcess.Length != 0) {
+            if (myHandle != 0) {
                 // Reading the raw name of the current mission as an array of bytes and converting it to a string
-                byte[] mapBytes = null;
+                string mapBytesStr = null;
 
-                switch (gameNumber) {
+                switch (gameNumber)
+                {
                     case 2:
-                        mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }));
+                        mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }, 8);
                         break;
                     case 3:
-                        mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets));
+                        mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets, 8);
                         break;
                 }
-
-                string mapBytesStr = enc.GetString(mapBytes);
 
                 if (mapBytesStr == "\0\0\0\0\0\0\0\0") {
                     // The game is no longer running
@@ -194,34 +194,34 @@ namespace HitmanStatistics {
                     switch (gameNumber) {
                         case 2:
                             // Reading the timer
-                            missionTime = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C58, new int[5] { 0x118, 0xB38, 0x8, 0x1084, 0x24 });
+                            missionTime = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C58, new int[5] { 0x118, 0xB38, 0x8, 0x1084, 0x24 });
 
                             // Reading every other value if the mission has started
                             if (missionTime > 0) {
-                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
-                                nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
-                                nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
-                                nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C });
-                                nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 });
-                                nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C });
-                                nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 });
-                                nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
+                                nbShotsFired = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
+                                nbCloseEncounters = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
+                                nbHeadshots = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
+                                nbAlerts = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C });
+                                nbEnemiesK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 });
+                                nbEnemiesH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C });
+                                nbInnocentsK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 });
+                                nbInnocentsH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
                             }
                             break;
                         case 3:
                             // Reading the timer
-                            missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x39457C, new int[1] { 0x24 });
+                            missionTime = Trainer.ReadPointerFloat(myHandle, baseAddress + 0x39457C, new int[1] { 0x24 });
 
                             // Reading every other value if the mission has started
                             if (missionTime > 0) {
-                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F });
-                                nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB2F });
-                                nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB17 });
-                                nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB2B });
-                                nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB1F });
-                                nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB1B });
-                                nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB27 });
-                                nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB23 });
+                                nbShotsFired = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F });
+                                nbCloseEncounters = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2F });
+                                nbHeadshots = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB17 });
+                                nbAlerts = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2B });
+                                nbEnemiesK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1F });
+                                nbEnemiesH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1B });
+                                nbInnocentsK = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB27 });
+                                nbInnocentsH = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB23 });
                             }
                             break;
                     }
@@ -237,7 +237,7 @@ namespace HitmanStatistics {
 
                     // Displaying the values
                     LB_MapName.Text = "#" + mapNumber + " " + mapName;
-                    LB_Time.Text = ((int)missionTime / 3600).ToString("D2") + ":" + ((missionTime / 60) % 60).ToString("00.000");
+                    LB_Time.Text = TimeSpan.FromSeconds(missionTime / 60).ToString(@"mm\:ss\.f");
                     NB_ShotsFired.Text = nbShotsFired.ToString();
                     NB_CloseEncounters.Text = nbCloseEncounters.ToString();
                     NB_Headshots.Text = nbHeadshots.ToString();
@@ -258,7 +258,7 @@ namespace HitmanStatistics {
             isMissionActive = false;
             LB_MapName.Text = "No mission currently";
             missionTime = 0;
-            LB_Time.Text = "00:00,000";
+            LB_Time.Text = "00:00.0";
             nbShotsFired = 0;
             NB_ShotsFired.Text = "0";
             nbCloseEncounters = 0;
@@ -284,7 +284,8 @@ namespace HitmanStatistics {
 
         // Used to reset the current game
         private void ResetGame() {
-            myProcess = null;
+            Trainer.CloseProcessHandle(myHandle);
+            myHandle = 0;
             gameName = "HITMAN " + gameNumber;
             LB_Running.Text = gameName + " IS NOT RUNNING";
             LB_Running.ForeColor = Color.Red;
