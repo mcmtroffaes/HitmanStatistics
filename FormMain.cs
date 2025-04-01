@@ -129,6 +129,7 @@ namespace HitmanStatistics {
             HCpointerNumber = 0;
             gameNumber = 2;
             gameName = "HITMAN 2";
+            myHandle = 0;
             ResetValues();
         }
 
@@ -284,8 +285,11 @@ namespace HitmanStatistics {
 
         // Used to reset the current game
         private void ResetGame() {
-            Trainer.CloseProcessHandle(myHandle);
-            myHandle = 0;
+            if (myHandle != 0)
+            {
+                Trainer.CloseProcessHandle(myHandle);
+                myHandle = 0;
+            }
             gameName = "HITMAN " + gameNumber;
             LB_Running.Text = gameName + " IS NOT RUNNING";
             LB_Running.ForeColor = Color.Red;
