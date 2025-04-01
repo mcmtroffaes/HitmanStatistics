@@ -119,74 +119,63 @@ namespace HitmanStatistics {
 
             if (myHandle != 0) {
                 // Reading the name of the current mission
-                string mapKey = "";
-
-                switch (gameNumber)
-                {
-                    case 2:
-                        mapKey = Trainer.ReadPointerString(myHandle, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }, 8);
-                        break;
-                    case 3:
-                        mapKey = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].Address, HCmapPointers[HCpointerNumber].Offsets, 8);
-                        break;
-                }
+                string mapKey = (
+                    (gameNumber == 2)
+                    ? Trainer.ReadPointerString(myHandle, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }, 8)
+                    : Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].Address, HCmapPointers[HCpointerNumber].Offsets, 8)
+                );
                 if (mapValues.ContainsKey(mapKey)) {
                     // A mission is currently active, ready to read memory
                     string mapName = mapValues[mapKey].Item1;
                     int mapNumber = mapValues[mapKey].Item2;
-                    float missionTime = 0;
-                    Statistics stats = new Statistics(0, 0, 0, 0, 0, 0, 0, 0);
-                    switch (gameNumber)
+                    float missionTime = (
+                        (gameNumber == 2)
+                        ? (Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C58, new int[5] { 0x118, 0xB38, 0x8, 0x1084, 0x24 }) / 60.0F)
+                        : Trainer.ReadPointerFloat(myHandle, baseAddress + 0x39457C, new int[1] { 0x24 })
+                    );
+                    if (missionTime > 0)
                     {
-                        case 2:
-                            missionTime = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C58, new int[5] { 0x118, 0xB38, 0x8, 0x1084, 0x24 });
-                            if (missionTime > 0)
-                            {
-                                stats = new Statistics(
-                                    sf: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 }),
-                                    ce: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 }),
-                                    hs: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 }),
-                                    al: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C }),
-                                    ek: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 }),
-                                    eh: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C }),
-                                    ik: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 }),
-                                    ih: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 })
-                                );
-                            }
-                            break;
-                        case 3:
-                            missionTime = Trainer.ReadPointerFloat(myHandle, baseAddress + 0x39457C, new int[1] { 0x24 });
-                            if (missionTime > 0)
-                            {
-                                stats = new Statistics(
-                                    sf: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F }),
-                                    ce: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2F }),
-                                    hs: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB17 }),
-                                    al: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2B }),
-                                    ek: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1F }),
-                                    eh: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1B }),
-                                    ik: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB27 }),
-                                    ih: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB23 })
-                                );
-                            }
-                            break;
+                        // Mission is running
+                        Statistics stats = (
+                            (gameNumber == 2)
+                            ? new Statistics(
+                                sf: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 }),
+                                ce: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 }),
+                                hs: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 }),
+                                al: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C }),
+                                ek: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 }),
+                                eh: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C }),
+                                ik: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 }),
+                                ih: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 })
+                            )
+                            : new Statistics(
+                                sf: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F }),
+                                ce: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2F }),
+                                hs: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB17 }),
+                                al: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2B }),
+                                ek: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1F }),
+                                eh: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB1B }),
+                                ik: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB27 }),
+                                ih: Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB23 })
+                            )
+                        );
+                        if (isSilentAssassin && !SilentAssassin.IsSilentAssassin(gameNumber, mapNumber, stats))
+                        {
+                            isSilentAssassin = false;
+                            IMG_SA.BackgroundImage = Properties.Resources.No;
+                            LB_SilentAssassin.ForeColor = Color.Red;
+                        }
+                        LB_MapName.Text = "#" + mapNumber + " " + mapName;
+                        LB_Time.Text = TimeSpan.FromSeconds(missionTime).ToString(@"mm\:ss\.f");
+                        NB_ShotsFired.Text = stats.nbShotsFired.ToString();
+                        NB_CloseEncounters.Text = stats.nbCloseEncounters.ToString();
+                        NB_Headshots.Text = stats.nbHeadshots.ToString();
+                        NB_Alerts.Text = stats.nbAlerts.ToString();
+                        NB_EnemiesKilled.Text = stats.nbEnemiesK.ToString();
+                        NB_EnemiesHarmed.Text = stats.nbEnemiesH.ToString();
+                        NB_InnocentsKilled.Text = stats.nbInnocentsK.ToString();
+                        NB_InnocentsHarmed.Text = stats.nbInnocentsH.ToString();
                     }
-                    if (isSilentAssassin && !SilentAssassin.IsSilentAssassin(gameNumber, mapNumber, stats))
-                    {
-                        isSilentAssassin = false;
-                        IMG_SA.BackgroundImage = Properties.Resources.No;
-                        LB_SilentAssassin.ForeColor = Color.Red;
-                    }
-                    LB_MapName.Text = "#" + mapNumber + " " + mapName;
-                    LB_Time.Text = TimeSpan.FromSeconds(missionTime / 60).ToString(@"mm\:ss\.f");
-                    NB_ShotsFired.Text = stats.nbShotsFired.ToString();
-                    NB_CloseEncounters.Text = stats.nbCloseEncounters.ToString();
-                    NB_Headshots.Text = stats.nbHeadshots.ToString();
-                    NB_Alerts.Text = stats.nbAlerts.ToString();
-                    NB_EnemiesKilled.Text = stats.nbEnemiesK.ToString();
-                    NB_EnemiesHarmed.Text = stats.nbEnemiesH.ToString();
-                    NB_InnocentsKilled.Text = stats.nbInnocentsK.ToString();
-                    NB_InnocentsHarmed.Text = stats.nbInnocentsH.ToString();
                 }
                 else {
                     // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment

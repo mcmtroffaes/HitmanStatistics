@@ -66,7 +66,7 @@
 
     public static bool IsSilentAssassin(int gameNumber, int mapNumber, Statistics stats)
     {
-        foreach (Statistics combination in (gameNumber == 2 ? validSACombinationH2 : (mapNumber != 1 ? validSACombinationHC : validSACombinationHCMap1)))
+        foreach (Statistics combination in ((gameNumber == 2) ? validSACombinationH2 : ((mapNumber != 1) ? validSACombinationHC : validSACombinationHCMap1)))
         {
             if (stats.IsLessOrEqualTo(combination))
             {
