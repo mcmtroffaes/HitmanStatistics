@@ -49,7 +49,7 @@ public class Trainer
     {
         byte[] Value = new byte[Size];
         int BytesRead = 0;
-        return (Pointer != 0 && ReadProcessMemory(Handle, Pointer, Value, Size, ref BytesRead) != 0) ? System.Text.Encoding.ASCII.GetString(Value) : null;
+        return (Pointer != 0 && ReadProcessMemory(Handle, Pointer, Value, Size, ref BytesRead) != 0) ? System.Text.Encoding.ASCII.GetString(Value) : "";
     }
 
     public static int FindPointer(int Handle, int Pointer, int[] Offset)
