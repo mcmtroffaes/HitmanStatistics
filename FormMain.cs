@@ -53,22 +53,27 @@ namespace HitmanStatistics {
 
         // Map pointers for HC
         readonly Pointer[] HCmapPointers = {
-            new Pointer(0x00393D58, new int[2] { 0x234, 0xBDE }), new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }), new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }), new Pointer(0x00394578, new int[2] { 0x1EC0, 0x49FA }), new Pointer(0x00394578, new int[3] { 0x1E00, 0xBC, 0x49FA }), new Pointer(0x00394578, new int[4] { 0x1D80, 0x7C, 0xBC, 0x49FA }),
-            new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }), new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })};
+            new Pointer(0x00393D58, new int[2] { 0x234, 0xBDE }),
+            new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }),
+            new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }),
+            new Pointer(0x00394578, new int[2] { 0x1EC0, 0x49FA }),
+            new Pointer(0x00394578, new int[3] { 0x1E00, 0xBC, 0x49FA }),
+            new Pointer(0x00394578, new int[4] { 0x1D80, 0x7C, 0xBC, 0x49FA }),
+            new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }),
+            new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }),
+            new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }),
+            new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }),
+            new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })
+        };
 
         // Other variables.
-        private readonly Image imgSA;
-        private readonly Image imgNotSA;
-        int myHandle;
-        int gameNumber, HCpointerNumber;
+        int myHandle, gameNumber, HCpointerNumber;
 
         /*------------------
         -- INITIALIZATION --
         ------------------*/
         public FormMain() {
             InitializeComponent();
-            imgSA = Properties.Resources.Yes;
-            imgNotSA = Properties.Resources.No;
             HCpointerNumber = 0;
             gameNumber = 2;
             myHandle = 0;
@@ -112,22 +117,22 @@ namespace HitmanStatistics {
 
             if (myHandle != 0) {
                 // Reading the name of the current mission
-                string mapBytesStr = "";
+                string mapKey = "";
 
                 switch (gameNumber)
                 {
                     case 2:
-                        mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }, 8);
+                        mapKey = Trainer.ReadPointerString(myHandle, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }, 8);
                         break;
                     case 3:
-                        mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].Address, HCmapPointers[HCpointerNumber].Offsets, 8);
+                        mapKey = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].Address, HCmapPointers[HCpointerNumber].Offsets, 8);
                         break;
                 }
-                if (mapValues.ContainsKey(mapBytesStr)) {
-                    // Get the clean mission name and the mission number from the dictionary
-                    string mapName = mapValues[mapBytesStr].Item1;
-                    int mapNumber = mapValues[mapBytesStr].Item2;
+                if (mapValues.ContainsKey(mapKey)) {
                     // A mission is currently active, ready to read memory
+                    // Get the clean mission name and the mission number from the dictionary
+                    string mapName = mapValues[mapKey].Item1;
+                    int mapNumber = mapValues[mapKey].Item2;
                     float missionTime = 0;
                     Statistics stats = new Statistics(0, 0, 0, 0, 0, 0, 0, 0);
                     switch (gameNumber)
@@ -173,14 +178,9 @@ namespace HitmanStatistics {
                     }
 
                     // Checking if the actual rating is SA according to the current stats
-                    if (stats.IsSilentAssassin(gameNumber, mapNumber))
+                    if (!stats.IsSilentAssassin(gameNumber, mapNumber))
                     {
-                        IMG_SA.BackgroundImage = imgSA;
-                        LB_SilentAssassin.ForeColor = Color.Green;
-                    }
-                    else
-                    {
-                        IMG_SA.BackgroundImage = imgNotSA;
+                        IMG_SA.BackgroundImage = Properties.Resources.No;
                         LB_SilentAssassin.ForeColor = Color.Red;
                     }
 
@@ -223,11 +223,8 @@ namespace HitmanStatistics {
             NB_EnemiesHarmed.Text = "0";
             NB_InnocentsKilled.Text = "0";
             NB_InnocentsHarmed.Text = "0";
-
-            if (IMG_SA.BackgroundImage != imgSA) {
-                IMG_SA.BackgroundImage = imgSA;
-                LB_SilentAssassin.ForeColor = Color.Green;
-            }
+            IMG_SA.BackgroundImage = Properties.Resources.Yes;
+            LB_SilentAssassin.ForeColor = Color.Green;
         }
 
         // Open a web page to the latest version of the tracker
