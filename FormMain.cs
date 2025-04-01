@@ -113,7 +113,6 @@ namespace HitmanStatistics {
         private readonly Image imgNotSA;
         int myHandle;
         string mapName;
-        float missionTime;
         bool isMissionActive;
         int gameNumber, mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, HCpointerNumber;
 
@@ -198,6 +197,7 @@ namespace HitmanStatistics {
 
                 if (isMissionActive) {
                     // A mission is currently active, ready to read memory
+                    float missionTime = 0;
                     switch (gameNumber) {
                         case 2:
                             // Reading the timer
@@ -264,7 +264,6 @@ namespace HitmanStatistics {
         private void ResetValues() {
             isMissionActive = false;
             LB_MapName.Text = "No Mission Active";
-            missionTime = 0;
             LB_Time.Text = "00:00.0";
             nbShotsFired = 0;
             NB_ShotsFired.Text = "0";
