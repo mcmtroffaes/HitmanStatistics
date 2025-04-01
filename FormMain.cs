@@ -68,6 +68,7 @@ namespace HitmanStatistics {
 
         // Other variables.
         int myHandle, gameNumber, HCpointerNumber;
+        bool isSilentAssassin;
 
         /*------------------
         -- INITIALIZATION --
@@ -77,6 +78,7 @@ namespace HitmanStatistics {
             HCpointerNumber = 0;
             gameNumber = 2;
             myHandle = 0;
+            isSilentAssassin = true;  // keep track to avoid overwriting image which causes "glitch"
         }
 
         /*------------------
@@ -169,8 +171,9 @@ namespace HitmanStatistics {
                             }
                             break;
                     }
-                    if (!SilentAssassin.IsSilentAssassin(gameNumber, mapNumber, stats))
+                    if (isSilentAssassin && !SilentAssassin.IsSilentAssassin(gameNumber, mapNumber, stats))
                     {
+                        isSilentAssassin = false;
                         IMG_SA.BackgroundImage = Properties.Resources.No;
                         LB_SilentAssassin.ForeColor = Color.Red;
                     }
@@ -210,8 +213,12 @@ namespace HitmanStatistics {
             NB_EnemiesHarmed.Text = "0";
             NB_InnocentsKilled.Text = "0";
             NB_InnocentsHarmed.Text = "0";
-            IMG_SA.BackgroundImage = Properties.Resources.Yes;
-            LB_SilentAssassin.ForeColor = Color.Green;
+            if (!isSilentAssassin)
+            {
+                isSilentAssassin = true;
+                IMG_SA.BackgroundImage = Properties.Resources.Yes;
+                LB_SilentAssassin.ForeColor = Color.Green;
+            }
         }
 
         // Open a web page to the latest version of the tracker
