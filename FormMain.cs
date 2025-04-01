@@ -166,7 +166,7 @@ namespace HitmanStatistics {
                         mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }, 8);
                         break;
                     case 3:
-                        mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets, 8);
+                        mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].Address, HCmapPointers[HCpointerNumber].Offsets, 8);
                         break;
                 }
 
