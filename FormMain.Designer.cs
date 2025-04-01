@@ -45,7 +45,6 @@
             this.LB_EnemiesHarmed = new System.Windows.Forms.Label();
             this.NB_InnocentsHarmed = new System.Windows.Forms.Label();
             this.LB_InnocentsHarmed = new System.Windows.Forms.Label();
-            this.LB_Timer = new System.Windows.Forms.Label();
             this.LB_SilentAssassin = new System.Windows.Forms.Label();
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.Menu_Update = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +59,7 @@
             // 
             this.LB_ShotsFired.AutoSize = true;
             this.LB_ShotsFired.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_ShotsFired.Location = new System.Drawing.Point(91, 303);
+            this.LB_ShotsFired.Location = new System.Drawing.Point(124, 303);
             this.LB_ShotsFired.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_ShotsFired.Name = "LB_ShotsFired";
             this.LB_ShotsFired.Size = new System.Drawing.Size(211, 46);
@@ -115,7 +114,7 @@
             // 
             this.LB_CloseEncounters.AutoSize = true;
             this.LB_CloseEncounters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_CloseEncounters.Location = new System.Drawing.Point(91, 351);
+            this.LB_CloseEncounters.Location = new System.Drawing.Point(124, 351);
             this.LB_CloseEncounters.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_CloseEncounters.Name = "LB_CloseEncounters";
             this.LB_CloseEncounters.Size = new System.Drawing.Size(332, 46);
@@ -139,7 +138,7 @@
             // 
             this.LB_Alerts.AutoSize = true;
             this.LB_Alerts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Alerts.Location = new System.Drawing.Point(91, 446);
+            this.LB_Alerts.Location = new System.Drawing.Point(124, 446);
             this.LB_Alerts.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Alerts.Name = "LB_Alerts";
             this.LB_Alerts.Size = new System.Drawing.Size(122, 46);
@@ -163,7 +162,7 @@
             // 
             this.LB_EnemiesKilled.AutoSize = true;
             this.LB_EnemiesKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_EnemiesKilled.Location = new System.Drawing.Point(91, 494);
+            this.LB_EnemiesKilled.Location = new System.Drawing.Point(124, 494);
             this.LB_EnemiesKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_EnemiesKilled.Name = "LB_EnemiesKilled";
             this.LB_EnemiesKilled.Size = new System.Drawing.Size(283, 46);
@@ -187,7 +186,7 @@
             // 
             this.LB_InnocentsKilled.AutoSize = true;
             this.LB_InnocentsKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_InnocentsKilled.Location = new System.Drawing.Point(91, 589);
+            this.LB_InnocentsKilled.Location = new System.Drawing.Point(124, 589);
             this.LB_InnocentsKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_InnocentsKilled.Name = "LB_InnocentsKilled";
             this.LB_InnocentsKilled.Size = new System.Drawing.Size(301, 46);
@@ -199,7 +198,7 @@
             this.LB_Time.AutoSize = true;
             this.LB_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Time.ForeColor = System.Drawing.Color.DimGray;
-            this.LB_Time.Location = new System.Drawing.Point(172, 227);
+            this.LB_Time.Location = new System.Drawing.Point(31, 227);
             this.LB_Time.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Time.Name = "LB_Time";
             this.LB_Time.Size = new System.Drawing.Size(166, 52);
@@ -234,7 +233,7 @@
             // 
             this.LB_Headshots.AutoSize = true;
             this.LB_Headshots.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Headshots.Location = new System.Drawing.Point(91, 398);
+            this.LB_Headshots.Location = new System.Drawing.Point(124, 398);
             this.LB_Headshots.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Headshots.Name = "LB_Headshots";
             this.LB_Headshots.Size = new System.Drawing.Size(211, 46);
@@ -258,7 +257,7 @@
             // 
             this.LB_EnemiesHarmed.AutoSize = true;
             this.LB_EnemiesHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_EnemiesHarmed.Location = new System.Drawing.Point(91, 541);
+            this.LB_EnemiesHarmed.Location = new System.Drawing.Point(124, 541);
             this.LB_EnemiesHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_EnemiesHarmed.Name = "LB_EnemiesHarmed";
             this.LB_EnemiesHarmed.Size = new System.Drawing.Size(327, 46);
@@ -282,30 +281,19 @@
             // 
             this.LB_InnocentsHarmed.AutoSize = true;
             this.LB_InnocentsHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_InnocentsHarmed.Location = new System.Drawing.Point(91, 637);
+            this.LB_InnocentsHarmed.Location = new System.Drawing.Point(124, 637);
             this.LB_InnocentsHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_InnocentsHarmed.Name = "LB_InnocentsHarmed";
             this.LB_InnocentsHarmed.Size = new System.Drawing.Size(345, 46);
             this.LB_InnocentsHarmed.TabIndex = 27;
             this.LB_InnocentsHarmed.Text = "Innocents Harmed";
             // 
-            // LB_Timer
-            // 
-            this.LB_Timer.AutoSize = true;
-            this.LB_Timer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Timer.Location = new System.Drawing.Point(32, 229);
-            this.LB_Timer.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.LB_Timer.Name = "LB_Timer";
-            this.LB_Timer.Size = new System.Drawing.Size(124, 46);
-            this.LB_Timer.TabIndex = 30;
-            this.LB_Timer.Text = "Time:";
-            // 
             // LB_SilentAssassin
             // 
             this.LB_SilentAssassin.AutoSize = true;
             this.LB_SilentAssassin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_SilentAssassin.ForeColor = System.Drawing.Color.Green;
-            this.LB_SilentAssassin.Location = new System.Drawing.Point(91, 717);
+            this.LB_SilentAssassin.Location = new System.Drawing.Point(124, 717);
             this.LB_SilentAssassin.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_SilentAssassin.Name = "LB_SilentAssassin";
             this.LB_SilentAssassin.Size = new System.Drawing.Size(306, 46);
@@ -376,7 +364,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.IMG_SA);
             this.Controls.Add(this.LB_SilentAssassin);
-            this.Controls.Add(this.LB_Timer);
             this.Controls.Add(this.NB_InnocentsHarmed);
             this.Controls.Add(this.LB_InnocentsHarmed);
             this.Controls.Add(this.NB_EnemiesHarmed);
@@ -433,7 +420,6 @@
         private System.Windows.Forms.Label LB_EnemiesHarmed;
         private System.Windows.Forms.Label NB_InnocentsHarmed;
         private System.Windows.Forms.Label LB_InnocentsHarmed;
-        private System.Windows.Forms.Label LB_Timer;
         private System.Windows.Forms.Label LB_SilentAssassin;
         private System.Windows.Forms.Panel IMG_SA;
         private System.Windows.Forms.MenuStrip MainMenu;
