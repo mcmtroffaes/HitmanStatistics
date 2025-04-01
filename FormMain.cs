@@ -113,7 +113,6 @@ namespace HitmanStatistics {
         private readonly Image imgNotSA;
         int myHandle;
         string mapName;
-        bool isMissionActive;
         int gameNumber, mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, HCpointerNumber;
 
         /*------------------
@@ -180,31 +179,19 @@ namespace HitmanStatistics {
                 }
                 if (mapValues.ContainsKey(mapBytesStr)) {
                     // Get the clean mission name and the mission number from the dictionary
-                    isMissionActive = true;
                     mapName = mapValues[mapBytesStr].Item1;
                     mapNumber = mapValues[mapBytesStr].Item2;
-                } else {
-                    // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment
-                    // The current screen is something like the main menu, the briefing or a cutscene
-                    isMissionActive = false;
-
-                    // Change the map pointer for Contracts, because I'm not sure which one is working at the moment
-                    // TODO: Find a working pointer
-                    HCpointerNumber++;
-                    if (HCpointerNumber > 10)
-                        HCpointerNumber = 0;
-                }
-
-                if (isMissionActive) {
                     // A mission is currently active, ready to read memory
                     float missionTime = 0;
-                    switch (gameNumber) {
+                    switch (gameNumber)
+                    {
                         case 2:
                             // Reading the timer
                             missionTime = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C58, new int[5] { 0x118, 0xB38, 0x8, 0x1084, 0x24 });
 
                             // Reading every other value if the mission has started
-                            if (missionTime > 0) {
+                            if (missionTime > 0)
+                            {
                                 nbShotsFired = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
                                 nbCloseEncounters = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
                                 nbHeadshots = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
@@ -220,7 +207,8 @@ namespace HitmanStatistics {
                             missionTime = Trainer.ReadPointerFloat(myHandle, baseAddress + 0x39457C, new int[1] { 0x24 });
 
                             // Reading every other value if the mission has started
-                            if (missionTime > 0) {
+                            if (missionTime > 0)
+                            {
                                 nbShotsFired = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F });
                                 nbCloseEncounters = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB2F });
                                 nbHeadshots = Trainer.ReadPointerInteger(myHandle, baseAddress + 0x3947C0, new int[1] { 0xB17 });
@@ -234,10 +222,13 @@ namespace HitmanStatistics {
                     }
 
                     // Checking if the actual rating is SA according to the current stats
-                    if (IsSilentAssassin()) {
+                    if (IsSilentAssassin())
+                    {
                         IMG_SA.BackgroundImage = imgSA;
                         LB_SilentAssassin.ForeColor = Color.Green;
-                    } else {
+                    }
+                    else
+                    {
                         IMG_SA.BackgroundImage = imgNotSA;
                         LB_SilentAssassin.ForeColor = Color.Red;
                     }
@@ -253,16 +244,24 @@ namespace HitmanStatistics {
                     NB_EnemiesHarmed.Text = nbEnemiesH.ToString();
                     NB_InnocentsKilled.Text = nbInnocentsK.ToString();
                     NB_InnocentsHarmed.Text = nbInnocentsH.ToString();
-                } else {
+                }
+                else {
+                    // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment
+                    // The current screen is something like the main menu, the briefing or a cutscene
                     // No mission is active, resetting values
                     ResetValues();
+
+                    // Change the map pointer for Contracts, because I'm not sure which one is working at the moment
+                    // TODO: Find a working pointer
+                    HCpointerNumber++;
+                    if (HCpointerNumber > 10)
+                        HCpointerNumber = 0;
                 }
             }
         }
 
         // Used to reset all the values
         private void ResetValues() {
-            isMissionActive = false;
             LB_MapName.Text = "No Mission Active";
             LB_Time.Text = "00:00.0";
             nbShotsFired = 0;
