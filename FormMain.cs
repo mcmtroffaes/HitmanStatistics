@@ -10,45 +10,108 @@ namespace HitmanStatistics {
         const int baseAddress = 0x00400000;
 
         // All the possible Silent Assassin combinations for Hitman 2
-        SACombination[] validSACombinationH2 = {
-            new SACombination(0, 1, 0, 0, 1, 2, 0, 0), new SACombination(0, 1, 0, 0, 0, 5, 0, 0), new SACombination(0, 1, 0, 0, 0, 2, 0, 1), new SACombination(0, 0, 0, 1, 2, 0, 0, 0), new SACombination(0, 0, 0, 1, 1, 3, 0, 0), 
-            new SACombination(0, 0, 0, 1, 1, 0, 0, 1), new SACombination(0, 0, 0, 1, 0, 6, 0, 0), new SACombination(0, 0, 0, 1, 0, 3, 0, 1), new SACombination(0, 0, 0, 1, 0, 0, 1, 0), new SACombination(0, 0, 0, 1, 0, 0, 0, 2), 
-            new SACombination(0, 0, 0, 0, 1, 0, 0, 1), new SACombination(1, 1, 1, 0, 0, 2, 0, 0), new SACombination(1, 1, 0, 0, 1, 0, 0, 0), new SACombination(1, 1, 0, 0, 0, 3, 0, 0), new SACombination(1, 1, 0, 0, 0, 0, 0, 1),
-            new SACombination(1, 0, 1, 1, 1, 0, 0, 0), new SACombination(1, 0, 1, 1, 0, 3, 0, 0), new SACombination(1, 0, 1, 1, 0, 0, 0, 1), new SACombination(1, 0, 0, 1, 1, 1, 0, 0), new SACombination(1, 0, 0, 1, 0, 4, 0, 0),
-            new SACombination(1, 0, 0, 1, 0, 1, 0, 1), new SACombination(1, 0, 0, 0, 1, 1, 0, 0), new SACombination(2, 1, 1, 0, 0, 0, 0, 0), new SACombination(2, 1, 0, 0, 0, 1, 0, 0), new SACombination(2, 0, 2, 1, 0, 0, 0, 0),
-            new SACombination(2, 0, 1, 1, 0, 1, 0, 0), new SACombination(3, 0, 0, 1, 0, 0, 0, 0)};
+        readonly SACombination[] validSACombinationH2 = {
+            new SACombination(0, 1, 0, 0, 1, 2, 0, 0),
+            new SACombination(0, 1, 0, 0, 0, 5, 0, 0),
+            new SACombination(0, 1, 0, 0, 0, 2, 0, 1),
+            new SACombination(0, 0, 0, 1, 2, 0, 0, 0),
+            new SACombination(0, 0, 0, 1, 1, 3, 0, 0), 
+            new SACombination(0, 0, 0, 1, 1, 0, 0, 1),
+            new SACombination(0, 0, 0, 1, 0, 6, 0, 0),
+            new SACombination(0, 0, 0, 1, 0, 3, 0, 1),
+            new SACombination(0, 0, 0, 1, 0, 0, 1, 0),
+            new SACombination(0, 0, 0, 1, 0, 0, 0, 2), 
+            new SACombination(0, 0, 0, 0, 1, 0, 0, 1),
+            new SACombination(1, 1, 1, 0, 0, 2, 0, 0),
+            new SACombination(1, 1, 0, 0, 1, 0, 0, 0),
+            new SACombination(1, 1, 0, 0, 0, 3, 0, 0),
+            new SACombination(1, 1, 0, 0, 0, 0, 0, 1),
+            new SACombination(1, 0, 1, 1, 1, 0, 0, 0),
+            new SACombination(1, 0, 1, 1, 0, 3, 0, 0),
+            new SACombination(1, 0, 1, 1, 0, 0, 0, 1),
+            new SACombination(1, 0, 0, 1, 1, 1, 0, 0),
+            new SACombination(1, 0, 0, 1, 0, 4, 0, 0),
+            new SACombination(1, 0, 0, 1, 0, 1, 0, 1),
+            new SACombination(1, 0, 0, 0, 1, 1, 0, 0),
+            new SACombination(2, 1, 1, 0, 0, 0, 0, 0),
+            new SACombination(2, 1, 0, 0, 0, 1, 0, 0),
+            new SACombination(2, 0, 2, 1, 0, 0, 0, 0),
+            new SACombination(2, 0, 1, 1, 0, 1, 0, 0),
+            new SACombination(3, 0, 0, 1, 0, 0, 0, 0)
+        };
 
         // All the possible Silent Assassin combinations for Hitman Contracts
-        SACombination[] validSACombinationHC = {
-            new SACombination(999, 0, 999, 1, 0, 0, 0, 0),  new SACombination(2, 1, 1, 0, 0, 0, 0, 0), new SACombination(2, 1, 0, 0, 0, 1, 0, 0), new SACombination(2, 0, 1, 1, 0, 1, 0, 0), new SACombination(2, 0, 0, 0, 0, 2, 0, 0), new SACombination(1, 1, 1, 0, 0, 2, 0, 0),
-            new SACombination(1, 1, 0, 0, 1, 0, 0, 0),      new SACombination(1, 1, 0, 0, 0, 3, 0, 0), new SACombination(1, 0, 1, 1, 1, 0, 0, 0), new SACombination(1, 0, 1, 1, 0, 3, 0, 0), new SACombination(1, 0, 0, 1, 1, 1, 0, 0),
-            new SACombination(1, 0, 0, 1, 0, 4, 0, 0),      new SACombination(0, 1, 0, 0, 1, 2, 0, 0), new SACombination(0, 1, 0, 0, 0, 5, 0, 0), new SACombination(0, 0, 0, 1, 1, 3, 0, 0), new SACombination(0, 0, 0, 1, 2, 0, 0, 0),
-            new SACombination(0, 0, 0, 1, 0, 6, 0, 0)};
+        readonly SACombination[] validSACombinationHC = {
+            new SACombination(999, 0, 999, 1, 0, 0, 0, 0),
+            new SACombination(2, 1, 1, 0, 0, 0, 0, 0),
+            new SACombination(2, 1, 0, 0, 0, 1, 0, 0),
+            new SACombination(2, 0, 1, 1, 0, 1, 0, 0),
+            new SACombination(2, 0, 0, 0, 0, 2, 0, 0),
+            new SACombination(1, 1, 1, 0, 0, 2, 0, 0),
+            new SACombination(1, 1, 0, 0, 1, 0, 0, 0),
+            new SACombination(1, 1, 0, 0, 0, 3, 0, 0),
+            new SACombination(1, 0, 1, 1, 1, 0, 0, 0),
+            new SACombination(1, 0, 1, 1, 0, 3, 0, 0),
+            new SACombination(1, 0, 0, 1, 1, 1, 0, 0),
+            new SACombination(1, 0, 0, 1, 0, 4, 0, 0),
+            new SACombination(0, 1, 0, 0, 1, 2, 0, 0),
+            new SACombination(0, 1, 0, 0, 0, 5, 0, 0),
+            new SACombination(0, 0, 0, 1, 1, 3, 0, 0),
+            new SACombination(0, 0, 0, 1, 2, 0, 0, 0),
+            new SACombination(0, 0, 0, 1, 0, 6, 0, 0)
+        };
 
         // Most values are accessed with 3-levels pointers and the second offset is different depending on the current mission.
         // All second offsets are stored here to be accessed according to the correct mission.
-        int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
+        readonly int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
 
         // Dictionary used to convert the raw map names into easily readable names and a map number to access the second offsets declared previously.
-        Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>() {
+        readonly Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>() {
             // Hitman 2
-            { "C1-1__MA", new Tuple<string, int>("Anathema", 1) },                  { "C2-1__MA", new Tuple<string, int>("St. Petersburg Stakeout", 2) },   { "C2-2__MA", new Tuple<string, int>("Kirov Park Meeting", 3) },    { "C2-3__MA", new Tuple<string, int>("Tubeway Torpedo", 4) },               { "C2-4__MA", new Tuple<string, int>("Invitation to a Party", 5) },
-            { "C3-1__MA", new Tuple<string, int>("Tracking Hayamoto", 6) },         { "\\C3-2a__", new Tuple<string, int>("Hidden Valley", 7) },            { "\\C3-2b__", new Tuple<string, int>("At the Gates", 8) },         { "C3-3__MA", new Tuple<string, int>("Shogun Showdown", 9) },               { "C4-1__MA", new Tuple<string, int>("Basement Killing", 10) },
-            { "C4-2__MA", new Tuple<string, int>("The Graveyard Shift", 11) },      { "C4-3__MA", new Tuple<string, int>("The Jacuzzi Job", 12) },          { "C5-1__MA", new Tuple<string, int>("Murder At The Bazaar", 13) }, { "C5-2__MA", new Tuple<string, int>("The Motorcade Interception", 14) },   { "C5-3__MA", new Tuple<string, int>("Tunnel Rat", 15) },
-            { "C6-1__MA", new Tuple<string, int>("Temple City Ambush", 16) },       { "C6-2__MA", new Tuple<string, int>("The Death of Hannelore", 17) },   { "C6-3__MA", new Tuple<string, int>("Terminal Hospitality", 18) }, { "C7-1__MA", new Tuple<string, int>("St. Petersburg Revisited", 19) },     { "C8-1__MA", new Tuple<string, int>("Redemption at Gontranno", 20) },
+            { "C1-1__MA", new Tuple<string, int>("Anathema", 1) },
+            { "C2-1__MA", new Tuple<string, int>("St. Petersburg Stakeout", 2) },
+            { "C2-2__MA", new Tuple<string, int>("Kirov Park Meeting", 3) },
+            { "C2-3__MA", new Tuple<string, int>("Tubeway Torpedo", 4) },
+            { "C2-4__MA", new Tuple<string, int>("Invitation to a Party", 5) },
+            { "C3-1__MA", new Tuple<string, int>("Tracking Hayamoto", 6) },
+            { "\\C3-2a__", new Tuple<string, int>("Hidden Valley", 7) },
+            { "\\C3-2b__", new Tuple<string, int>("At the Gates", 8) },
+            { "C3-3__MA", new Tuple<string, int>("Shogun Showdown", 9) },
+            { "C4-1__MA", new Tuple<string, int>("Basement Killing", 10) },
+            { "C4-2__MA", new Tuple<string, int>("The Graveyard Shift", 11) },
+            { "C4-3__MA", new Tuple<string, int>("The Jacuzzi Job", 12) },
+            { "C5-1__MA", new Tuple<string, int>("Murder At The Bazaar", 13) },
+            { "C5-2__MA", new Tuple<string, int>("The Motorcade Interception", 14) },
+            { "C5-3__MA", new Tuple<string, int>("Tunnel Rat", 15) },
+            { "C6-1__MA", new Tuple<string, int>("Temple City Ambush", 16) },
+            { "C6-2__MA", new Tuple<string, int>("The Death of Hannelore", 17) },
+            { "C6-3__MA", new Tuple<string, int>("Terminal Hospitality", 18) },
+            { "C7-1__MA", new Tuple<string, int>("St. Petersburg Revisited", 19) },
+            { "C8-1__MA", new Tuple<string, int>("Redemption at Gontranno", 20) },
             // Hitman Contracts
-            { "C01-1_MA", new Tuple<string, int>("Asylum Aftermath", 1) },          { "C01-2_MA", new Tuple<string, int>("The Meat King's Party", 2) },     { "C02-1_MA", new Tuple<string, int>("The Bjarkhov Bomb", 3) },     { "C03-1_MA", new Tuple<string, int>("Beldingford Manor", 4) },             { "C06-1_MA", new Tuple<string, int>("Rendezvous in Rotterdam", 5) },
-            { "C06-2_MA", new Tuple<string, int>("Deadly Cargo", 6) },              { "C07-1_MA", new Tuple<string, int>("Traditions of the Trade", 7) },   { "C08-1_MA", new Tuple<string, int>("Slaying a Dragon", 8) },      { "C08-2_MA", new Tuple<string, int>("The Wang Fou Incident", 9) },         { "C08-3_MA", new Tuple<string, int>("The Seafood Massacre", 10) },
-            { "C08-4_MA", new Tuple<string, int>("Lee Hong Assassination", 11) },   { "C09-1_MA", new Tuple<string, int>("Hunter and Hunted", 12) }};
+            { "C01-1_MA", new Tuple<string, int>("Asylum Aftermath", 1) },
+            { "C01-2_MA", new Tuple<string, int>("The Meat King's Party", 2) },
+            { "C02-1_MA", new Tuple<string, int>("The Bjarkhov Bomb", 3) },
+            { "C03-1_MA", new Tuple<string, int>("Beldingford Manor", 4) },
+            { "C06-1_MA", new Tuple<string, int>("Rendezvous in Rotterdam", 5) },
+            { "C06-2_MA", new Tuple<string, int>("Deadly Cargo", 6) },
+            { "C07-1_MA", new Tuple<string, int>("Traditions of the Trade", 7) },
+            { "C08-1_MA", new Tuple<string, int>("Slaying a Dragon", 8) },
+            { "C08-2_MA", new Tuple<string, int>("The Wang Fou Incident", 9) },
+            { "C08-3_MA", new Tuple<string, int>("The Seafood Massacre", 10) },
+            { "C08-4_MA", new Tuple<string, int>("Lee Hong Assassination", 11) },
+            { "C09-1_MA", new Tuple<string, int>("Hunter and Hunted", 12) }
+        };
 
         // Map pointers for HC
-        Pointer[] HCmapPointers = {
+        readonly Pointer[] HCmapPointers = {
             new Pointer(0x00393D58, new int[2] { 0x234, 0xBDE }), new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }), new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }), new Pointer(0x00394578, new int[2] { 0x1EC0, 0x49FA }), new Pointer(0x00394578, new int[3] { 0x1E00, 0xBC, 0x49FA }), new Pointer(0x00394578, new int[4] { 0x1D80, 0x7C, 0xBC, 0x49FA }),
             new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }), new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })};
 
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
-        Image imgSA, imgNotSA;
+        private readonly Image imgSA;
+        private readonly Image imgNotSA;
         Process[] myProcess;
         String mapName;
         float missionTime;
