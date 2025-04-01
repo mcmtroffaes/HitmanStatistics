@@ -60,7 +60,7 @@
             // 
             this.LB_ShotsFired.AutoSize = true;
             this.LB_ShotsFired.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_ShotsFired.Location = new System.Drawing.Point(123, 303);
+            this.LB_ShotsFired.Location = new System.Drawing.Point(91, 303);
             this.LB_ShotsFired.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_ShotsFired.Name = "LB_ShotsFired";
             this.LB_ShotsFired.Size = new System.Drawing.Size(211, 46);
@@ -115,7 +115,7 @@
             // 
             this.LB_CloseEncounters.AutoSize = true;
             this.LB_CloseEncounters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_CloseEncounters.Location = new System.Drawing.Point(123, 351);
+            this.LB_CloseEncounters.Location = new System.Drawing.Point(91, 351);
             this.LB_CloseEncounters.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_CloseEncounters.Name = "LB_CloseEncounters";
             this.LB_CloseEncounters.Size = new System.Drawing.Size(332, 46);
@@ -139,7 +139,7 @@
             // 
             this.LB_Alerts.AutoSize = true;
             this.LB_Alerts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Alerts.Location = new System.Drawing.Point(123, 446);
+            this.LB_Alerts.Location = new System.Drawing.Point(91, 446);
             this.LB_Alerts.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Alerts.Name = "LB_Alerts";
             this.LB_Alerts.Size = new System.Drawing.Size(122, 46);
@@ -163,7 +163,7 @@
             // 
             this.LB_EnemiesKilled.AutoSize = true;
             this.LB_EnemiesKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_EnemiesKilled.Location = new System.Drawing.Point(123, 494);
+            this.LB_EnemiesKilled.Location = new System.Drawing.Point(91, 494);
             this.LB_EnemiesKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_EnemiesKilled.Name = "LB_EnemiesKilled";
             this.LB_EnemiesKilled.Size = new System.Drawing.Size(283, 46);
@@ -187,7 +187,7 @@
             // 
             this.LB_InnocentsKilled.AutoSize = true;
             this.LB_InnocentsKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_InnocentsKilled.Location = new System.Drawing.Point(123, 589);
+            this.LB_InnocentsKilled.Location = new System.Drawing.Point(91, 589);
             this.LB_InnocentsKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_InnocentsKilled.Name = "LB_InnocentsKilled";
             this.LB_InnocentsKilled.Size = new System.Drawing.Size(301, 46);
@@ -234,7 +234,7 @@
             // 
             this.LB_Headshots.AutoSize = true;
             this.LB_Headshots.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Headshots.Location = new System.Drawing.Point(123, 398);
+            this.LB_Headshots.Location = new System.Drawing.Point(91, 398);
             this.LB_Headshots.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Headshots.Name = "LB_Headshots";
             this.LB_Headshots.Size = new System.Drawing.Size(211, 46);
@@ -258,7 +258,7 @@
             // 
             this.LB_EnemiesHarmed.AutoSize = true;
             this.LB_EnemiesHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_EnemiesHarmed.Location = new System.Drawing.Point(123, 541);
+            this.LB_EnemiesHarmed.Location = new System.Drawing.Point(91, 541);
             this.LB_EnemiesHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_EnemiesHarmed.Name = "LB_EnemiesHarmed";
             this.LB_EnemiesHarmed.Size = new System.Drawing.Size(327, 46);
@@ -282,7 +282,7 @@
             // 
             this.LB_InnocentsHarmed.AutoSize = true;
             this.LB_InnocentsHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_InnocentsHarmed.Location = new System.Drawing.Point(123, 637);
+            this.LB_InnocentsHarmed.Location = new System.Drawing.Point(91, 637);
             this.LB_InnocentsHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_InnocentsHarmed.Name = "LB_InnocentsHarmed";
             this.LB_InnocentsHarmed.Size = new System.Drawing.Size(345, 46);
@@ -305,7 +305,7 @@
             this.LB_SilentAssassin.AutoSize = true;
             this.LB_SilentAssassin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_SilentAssassin.ForeColor = System.Drawing.Color.Green;
-            this.LB_SilentAssassin.Location = new System.Drawing.Point(120, 720);
+            this.LB_SilentAssassin.Location = new System.Drawing.Point(123, 717);
             this.LB_SilentAssassin.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_SilentAssassin.Name = "LB_SilentAssassin";
             this.LB_SilentAssassin.Size = new System.Drawing.Size(306, 46);
@@ -322,21 +322,21 @@
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Padding = new System.Windows.Forms.Padding(16, 5, 0, 5);
-            this.MainMenu.Size = new System.Drawing.Size(805, 60);
+            this.MainMenu.Size = new System.Drawing.Size(805, 55);
             this.MainMenu.TabIndex = 34;
             this.MainMenu.Text = "menuStrip1";
             // 
             // Menu_Update
             // 
             this.Menu_Update.Name = "Menu_Update";
-            this.Menu_Update.Size = new System.Drawing.Size(140, 50);
+            this.Menu_Update.Size = new System.Drawing.Size(140, 45);
             this.Menu_Update.Text = "Update";
             this.Menu_Update.Click += new System.EventHandler(this.Menu_Update_Click);
             // 
             // Menu_About
             // 
             this.Menu_About.Name = "Menu_About";
-            this.Menu_About.Size = new System.Drawing.Size(124, 50);
+            this.Menu_About.Size = new System.Drawing.Size(124, 45);
             this.Menu_About.Text = "About";
             this.Menu_About.Click += new System.EventHandler(this.Menu_About_Click);
             // 
