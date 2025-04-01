@@ -77,13 +77,13 @@
             // 
             this.LB_Running.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Running.ForeColor = System.Drawing.Color.DimGray;
-            this.LB_Running.Location = new System.Drawing.Point(0, 76);
+            this.LB_Running.Location = new System.Drawing.Point(31, 72);
             this.LB_Running.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Running.Name = "LB_Running";
-            this.LB_Running.Size = new System.Drawing.Size(805, 57);
+            this.LB_Running.Size = new System.Drawing.Size(774, 66);
             this.LB_Running.TabIndex = 1;
             this.LB_Running.Text = "Game Not Running";
-            this.LB_Running.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LB_Running.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // NB_ShotsFired
             // 
@@ -209,13 +209,13 @@
             // LB_MapName
             // 
             this.LB_MapName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_MapName.Location = new System.Drawing.Point(0, 150);
+            this.LB_MapName.Location = new System.Drawing.Point(32, 151);
             this.LB_MapName.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_MapName.Name = "LB_MapName";
-            this.LB_MapName.Size = new System.Drawing.Size(805, 76);
+            this.LB_MapName.Size = new System.Drawing.Size(773, 76);
             this.LB_MapName.TabIndex = 22;
             this.LB_MapName.Text = "No Mission Active";
-            this.LB_MapName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LB_MapName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // NB_Headshots
             // 
@@ -305,7 +305,7 @@
             this.LB_SilentAssassin.AutoSize = true;
             this.LB_SilentAssassin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_SilentAssassin.ForeColor = System.Drawing.Color.Green;
-            this.LB_SilentAssassin.Location = new System.Drawing.Point(123, 717);
+            this.LB_SilentAssassin.Location = new System.Drawing.Point(91, 717);
             this.LB_SilentAssassin.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_SilentAssassin.Name = "LB_SilentAssassin";
             this.LB_SilentAssassin.Size = new System.Drawing.Size(306, 46);
