@@ -151,7 +151,7 @@ namespace HitmanStatistics {
                 if (myHandle != 0)
                 {
                     LB_Running.Text = (gameNumber == 2) ? "Hitman 2 Silent Assassin" : "Hitman Contracts";
-                    Timer.Interval = 50;
+                    Timer.Interval = 100;
                 }
             }
 
