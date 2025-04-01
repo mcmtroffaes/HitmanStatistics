@@ -115,7 +115,6 @@ namespace HitmanStatistics {
         string mapName;
         float missionTime;
         bool isMissionActive;
-        string gameName;
         int gameNumber, mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, HCpointerNumber;
 
         /*------------------
@@ -127,7 +126,6 @@ namespace HitmanStatistics {
             imgNotSA = Properties.Resources.No;
             HCpointerNumber = 0;
             gameNumber = 2;
-            gameName = "HITMAN 2";
             myHandle = 0;
             ResetValues();
         }
@@ -138,26 +136,39 @@ namespace HitmanStatistics {
         private void Timer_Tick(object sender, EventArgs e) {
             // Attempt to find if the game is currently running
             if (myHandle == 0) {
-                switch (gameNumber)
+                myHandle = Trainer.OpenProcessHandle("hitman2");
+                if (myHandle != 0)
                 {
-                    case 2:
-                        myHandle = Trainer.OpenProcessHandle("hitman2");
-                        break;
-                    case 3:
-                        myHandle = Trainer.OpenProcessHandle("HitmanContracts");
-                        break;
+                    gameNumber = 2;
+                }
+                else {
+                    myHandle = Trainer.OpenProcessHandle("HitmanContracts");
+                    if (myHandle != 0)
+                    {
+                        gameNumber = 3;
+                    }
                 }
                 if (myHandle != 0)
                 {
-                    LB_Running.Text = gameName + " IS RUNNING";
-                    LB_Running.ForeColor = Color.Green;
+                    LB_Running.Text = (gameNumber == 2) ? "Hitman 2 Silent Assassin" : "Hitman Contracts";
                     Timer.Interval = 50;
                 }
             }
 
+            // Check handle. If no longer valid, game was stopped.
+            // integer at baseAddress should be 0x00905A4D if the game is running
+            if (myHandle != 0 && Trainer.ReadPointerInteger(myHandle, baseAddress) != 0x00905A4D)
+            {
+                ResetValues();
+                Trainer.CloseProcessHandle(myHandle);
+                myHandle = 0;
+                LB_Running.Text = "Game Not Running";
+                Timer.Interval = 500;
+            }
+
             if (myHandle != 0) {
-                // Reading the raw name of the current mission as an array of bytes and converting it to a string
-                string mapBytesStr = null;
+                // Reading the name of the current mission
+                string mapBytesStr = "";
 
                 switch (gameNumber)
                 {
@@ -168,11 +179,7 @@ namespace HitmanStatistics {
                         mapBytesStr = Trainer.ReadPointerString(myHandle, baseAddress + HCmapPointers[HCpointerNumber].Address, HCmapPointers[HCpointerNumber].Offsets, 8);
                         break;
                 }
-
-                if (mapBytesStr == "\0\0\0\0\0\0\0\0") {
-                    // The game is no longer running
-                    ResetGame();
-                } else if (mapValues.ContainsKey(mapBytesStr)) {
+                if (mapValues.ContainsKey(mapBytesStr)) {
                     // Get the clean mission name and the mission number from the dictionary
                     isMissionActive = true;
                     mapName = mapValues[mapBytesStr].Item1;
@@ -247,7 +254,7 @@ namespace HitmanStatistics {
                     NB_InnocentsKilled.Text = nbInnocentsK.ToString();
                     NB_InnocentsHarmed.Text = nbInnocentsH.ToString();
                 } else {
-                    // No mission is active, reseting values
+                    // No mission is active, resetting values
                     ResetValues();
                 }
             }
@@ -256,7 +263,7 @@ namespace HitmanStatistics {
         // Used to reset all the values
         private void ResetValues() {
             isMissionActive = false;
-            LB_MapName.Text = "No mission currently";
+            LB_MapName.Text = "No Mission Active";
             missionTime = 0;
             LB_Time.Text = "00:00.0";
             nbShotsFired = 0;
@@ -282,20 +289,6 @@ namespace HitmanStatistics {
             }
         }
 
-        // Used to reset the current game
-        private void ResetGame() {
-            if (myHandle != 0)
-            {
-                Trainer.CloseProcessHandle(myHandle);
-                myHandle = 0;
-            }
-            gameName = "HITMAN " + gameNumber;
-            LB_Running.Text = gameName + " IS NOT RUNNING";
-            LB_Running.ForeColor = Color.Red;
-            Timer.Interval = 500;
-            ResetValues();
-        }
-
         // Used to check if the actual rating is Silent Assassin
         private bool IsSilentAssassin() {
             SACombination[] validSACombination = null;
@@ -317,18 +310,6 @@ namespace HitmanStatistics {
                 }
             }
             return false;
-        }
-
-        // Selecting the Hitman 2 game
-        private void Menu_Game_H2_Click(object sender, EventArgs e) {
-            gameNumber = 2;
-            ResetGame();
-        }
-
-        // Selecting the Hitman 3 game
-        private void Menu_Game_H3_Click(object sender, EventArgs e) {
-            gameNumber = 3;
-            ResetGame();
         }
 
         // Open a web page to the latest version of the tracker
