@@ -1,8 +1,4 @@
-﻿using System;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Xml.Linq;
-
-public class Mission
+﻿public class Mission
 {
     public readonly int number;
     public readonly string name;
