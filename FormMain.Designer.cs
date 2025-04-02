@@ -59,7 +59,7 @@
             // 
             this.LB_ShotsFired.AutoSize = true;
             this.LB_ShotsFired.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_ShotsFired.Location = new System.Drawing.Point(124, 303);
+            this.LB_ShotsFired.Location = new System.Drawing.Point(17, 303);
             this.LB_ShotsFired.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_ShotsFired.Name = "LB_ShotsFired";
             this.LB_ShotsFired.Size = new System.Drawing.Size(211, 46);
@@ -76,7 +76,7 @@
             // 
             this.LB_Running.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Running.ForeColor = System.Drawing.Color.DimGray;
-            this.LB_Running.Location = new System.Drawing.Point(31, 72);
+            this.LB_Running.Location = new System.Drawing.Point(17, 72);
             this.LB_Running.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Running.Name = "LB_Running";
             this.LB_Running.Size = new System.Drawing.Size(774, 66);
@@ -89,7 +89,7 @@
             this.NB_ShotsFired.AutoSize = true;
             this.NB_ShotsFired.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_ShotsFired.ForeColor = System.Drawing.Color.Blue;
-            this.NB_ShotsFired.Location = new System.Drawing.Point(32, 303);
+            this.NB_ShotsFired.Location = new System.Drawing.Point(417, 303);
             this.NB_ShotsFired.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_ShotsFired.Name = "NB_ShotsFired";
             this.NB_ShotsFired.Size = new System.Drawing.Size(43, 46);
@@ -102,7 +102,7 @@
             this.NB_CloseEncounters.AutoSize = true;
             this.NB_CloseEncounters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_CloseEncounters.ForeColor = System.Drawing.Color.Blue;
-            this.NB_CloseEncounters.Location = new System.Drawing.Point(32, 351);
+            this.NB_CloseEncounters.Location = new System.Drawing.Point(417, 349);
             this.NB_CloseEncounters.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_CloseEncounters.Name = "NB_CloseEncounters";
             this.NB_CloseEncounters.Size = new System.Drawing.Size(43, 46);
@@ -114,7 +114,7 @@
             // 
             this.LB_CloseEncounters.AutoSize = true;
             this.LB_CloseEncounters.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_CloseEncounters.Location = new System.Drawing.Point(124, 351);
+            this.LB_CloseEncounters.Location = new System.Drawing.Point(18, 349);
             this.LB_CloseEncounters.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_CloseEncounters.Name = "LB_CloseEncounters";
             this.LB_CloseEncounters.Size = new System.Drawing.Size(332, 46);
@@ -126,7 +126,7 @@
             this.NB_Alerts.AutoSize = true;
             this.NB_Alerts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_Alerts.ForeColor = System.Drawing.Color.Blue;
-            this.NB_Alerts.Location = new System.Drawing.Point(32, 446);
+            this.NB_Alerts.Location = new System.Drawing.Point(417, 441);
             this.NB_Alerts.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_Alerts.Name = "NB_Alerts";
             this.NB_Alerts.Size = new System.Drawing.Size(43, 46);
@@ -138,7 +138,7 @@
             // 
             this.LB_Alerts.AutoSize = true;
             this.LB_Alerts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Alerts.Location = new System.Drawing.Point(124, 446);
+            this.LB_Alerts.Location = new System.Drawing.Point(18, 441);
             this.LB_Alerts.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Alerts.Name = "LB_Alerts";
             this.LB_Alerts.Size = new System.Drawing.Size(122, 46);
@@ -150,7 +150,7 @@
             this.NB_EnemiesKilled.AutoSize = true;
             this.NB_EnemiesKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_EnemiesKilled.ForeColor = System.Drawing.Color.Blue;
-            this.NB_EnemiesKilled.Location = new System.Drawing.Point(32, 494);
+            this.NB_EnemiesKilled.Location = new System.Drawing.Point(417, 487);
             this.NB_EnemiesKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_EnemiesKilled.Name = "NB_EnemiesKilled";
             this.NB_EnemiesKilled.Size = new System.Drawing.Size(43, 46);
@@ -162,7 +162,7 @@
             // 
             this.LB_EnemiesKilled.AutoSize = true;
             this.LB_EnemiesKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_EnemiesKilled.Location = new System.Drawing.Point(124, 494);
+            this.LB_EnemiesKilled.Location = new System.Drawing.Point(17, 487);
             this.LB_EnemiesKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_EnemiesKilled.Name = "LB_EnemiesKilled";
             this.LB_EnemiesKilled.Size = new System.Drawing.Size(283, 46);
@@ -174,7 +174,7 @@
             this.NB_InnocentsKilled.AutoSize = true;
             this.NB_InnocentsKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_InnocentsKilled.ForeColor = System.Drawing.Color.Blue;
-            this.NB_InnocentsKilled.Location = new System.Drawing.Point(32, 589);
+            this.NB_InnocentsKilled.Location = new System.Drawing.Point(417, 579);
             this.NB_InnocentsKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_InnocentsKilled.Name = "NB_InnocentsKilled";
             this.NB_InnocentsKilled.Size = new System.Drawing.Size(43, 46);
@@ -186,7 +186,7 @@
             // 
             this.LB_InnocentsKilled.AutoSize = true;
             this.LB_InnocentsKilled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_InnocentsKilled.Location = new System.Drawing.Point(124, 589);
+            this.LB_InnocentsKilled.Location = new System.Drawing.Point(18, 579);
             this.LB_InnocentsKilled.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_InnocentsKilled.Name = "LB_InnocentsKilled";
             this.LB_InnocentsKilled.Size = new System.Drawing.Size(301, 46);
@@ -198,7 +198,7 @@
             this.LB_Time.AutoSize = true;
             this.LB_Time.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Time.ForeColor = System.Drawing.Color.DimGray;
-            this.LB_Time.Location = new System.Drawing.Point(31, 227);
+            this.LB_Time.Location = new System.Drawing.Point(17, 227);
             this.LB_Time.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Time.Name = "LB_Time";
             this.LB_Time.Size = new System.Drawing.Size(166, 52);
@@ -208,7 +208,7 @@
             // LB_MapName
             // 
             this.LB_MapName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_MapName.Location = new System.Drawing.Point(32, 151);
+            this.LB_MapName.Location = new System.Drawing.Point(17, 151);
             this.LB_MapName.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_MapName.Name = "LB_MapName";
             this.LB_MapName.Size = new System.Drawing.Size(773, 76);
@@ -221,7 +221,7 @@
             this.NB_Headshots.AutoSize = true;
             this.NB_Headshots.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_Headshots.ForeColor = System.Drawing.Color.Blue;
-            this.NB_Headshots.Location = new System.Drawing.Point(32, 398);
+            this.NB_Headshots.Location = new System.Drawing.Point(417, 395);
             this.NB_Headshots.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_Headshots.Name = "NB_Headshots";
             this.NB_Headshots.Size = new System.Drawing.Size(43, 46);
@@ -233,7 +233,7 @@
             // 
             this.LB_Headshots.AutoSize = true;
             this.LB_Headshots.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_Headshots.Location = new System.Drawing.Point(124, 398);
+            this.LB_Headshots.Location = new System.Drawing.Point(17, 395);
             this.LB_Headshots.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_Headshots.Name = "LB_Headshots";
             this.LB_Headshots.Size = new System.Drawing.Size(211, 46);
@@ -245,7 +245,7 @@
             this.NB_EnemiesHarmed.AutoSize = true;
             this.NB_EnemiesHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_EnemiesHarmed.ForeColor = System.Drawing.Color.Blue;
-            this.NB_EnemiesHarmed.Location = new System.Drawing.Point(32, 541);
+            this.NB_EnemiesHarmed.Location = new System.Drawing.Point(417, 533);
             this.NB_EnemiesHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_EnemiesHarmed.Name = "NB_EnemiesHarmed";
             this.NB_EnemiesHarmed.Size = new System.Drawing.Size(43, 46);
@@ -257,7 +257,7 @@
             // 
             this.LB_EnemiesHarmed.AutoSize = true;
             this.LB_EnemiesHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_EnemiesHarmed.Location = new System.Drawing.Point(124, 541);
+            this.LB_EnemiesHarmed.Location = new System.Drawing.Point(18, 533);
             this.LB_EnemiesHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_EnemiesHarmed.Name = "LB_EnemiesHarmed";
             this.LB_EnemiesHarmed.Size = new System.Drawing.Size(327, 46);
@@ -269,7 +269,7 @@
             this.NB_InnocentsHarmed.AutoSize = true;
             this.NB_InnocentsHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NB_InnocentsHarmed.ForeColor = System.Drawing.Color.Blue;
-            this.NB_InnocentsHarmed.Location = new System.Drawing.Point(32, 637);
+            this.NB_InnocentsHarmed.Location = new System.Drawing.Point(417, 625);
             this.NB_InnocentsHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NB_InnocentsHarmed.Name = "NB_InnocentsHarmed";
             this.NB_InnocentsHarmed.Size = new System.Drawing.Size(43, 46);
@@ -281,7 +281,7 @@
             // 
             this.LB_InnocentsHarmed.AutoSize = true;
             this.LB_InnocentsHarmed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_InnocentsHarmed.Location = new System.Drawing.Point(124, 637);
+            this.LB_InnocentsHarmed.Location = new System.Drawing.Point(18, 625);
             this.LB_InnocentsHarmed.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_InnocentsHarmed.Name = "LB_InnocentsHarmed";
             this.LB_InnocentsHarmed.Size = new System.Drawing.Size(345, 46);
@@ -293,7 +293,7 @@
             this.LB_SilentAssassin.AutoSize = true;
             this.LB_SilentAssassin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_SilentAssassin.ForeColor = System.Drawing.Color.Green;
-            this.LB_SilentAssassin.Location = new System.Drawing.Point(124, 717);
+            this.LB_SilentAssassin.Location = new System.Drawing.Point(18, 709);
             this.LB_SilentAssassin.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.LB_SilentAssassin.Name = "LB_SilentAssassin";
             this.LB_SilentAssassin.Size = new System.Drawing.Size(306, 46);
@@ -349,7 +349,7 @@
             // IMG_SA
             // 
             this.IMG_SA.BackgroundImage = global::HitmanStatistics.Properties.Resources.Yes;
-            this.IMG_SA.Location = new System.Drawing.Point(35, 725);
+            this.IMG_SA.Location = new System.Drawing.Point(425, 717);
             this.IMG_SA.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.IMG_SA.Name = "IMG_SA";
             this.IMG_SA.Size = new System.Drawing.Size(43, 38);

@@ -33,4 +33,9 @@
             && nbInnocentsH <= other.nbInnocentsH
         );
     }
+
+    public override string ToString()
+    {
+        return $"sf={nbShotsFired} ce={nbCloseEncounters} hs={nbHeadshots} al={nbAlerts} ek={nbEnemiesH} eh={nbEnemiesH} ik={nbInnocentsK} ih={nbInnocentsH}";
+    }
 }

@@ -94,6 +94,10 @@
     <Compile Include="FormAbout.Designer.cs">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameHitmanContracts.cs" />
+    <Compile Include="GameHitman2SA.cs" />
+    <Compile Include="IGame.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
