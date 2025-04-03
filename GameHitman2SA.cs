@@ -96,7 +96,7 @@ public class GameHitman2SA : IGame
                 {
                     int mapSecondOffset = secondOffset[mapNumber - 1];
                     Statistics stats = new Statistics(
-                        sf: Trainer.ReadPointerInteger(Handle, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 }),  // TODO this is broken
+                        sf: Trainer.ReadPointerInteger(Handle, baseAddress + 0x125FC, new int[2] { 0x0, 0x11C7 }),
                         ce: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x220 }),
                         hs: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x208 }),
                         al: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x21C }),
