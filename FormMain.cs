@@ -60,6 +60,13 @@ namespace HitmanStatistics {
                         IMG_SA.BackgroundImage = Properties.Resources.No;
                         LB_SilentAssassin.ForeColor = Color.Red;
                     }
+                    if (!isSilentAssassin && mission.isSilentAssassin)
+                    {
+                        // this might happen if shots fired briefly points at wrong value causing brief (yet invalid) loss of silent assassin rating
+                        isSilentAssassin = true;
+                        IMG_SA.BackgroundImage = Properties.Resources.Yes;
+                        LB_SilentAssassin.ForeColor = Color.Green;
+                    }
                     LB_MapName.Text = "#" + mission.number + " " + mission.name;
                     LB_Time.Text = TimeSpan.FromSeconds(mission.time).ToString(@"mm\:ss\.f");
                     NB_ShotsFired.Text = mission.statistics.nbShotsFired.ToString();
