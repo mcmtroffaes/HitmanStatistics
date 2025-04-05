@@ -52,14 +52,14 @@ namespace HitmanStatistics {
             if (myHandle != 0) {
                 Logger.Log("checking mission data...");
                 Mission mission = game.Mission(myHandle);
-                if (isSilentAssassin && !mission.isSilentAssassin)
-                {
-                    isSilentAssassin = false;
-                    IMG_SA.BackgroundImage = Properties.Resources.No;
-                    LB_SilentAssassin.ForeColor = Color.Red;
-                }
                 if (mission.number != 0)
                 {
+                    if (isSilentAssassin && !mission.isSilentAssassin)
+                    {
+                        isSilentAssassin = false;
+                        IMG_SA.BackgroundImage = Properties.Resources.No;
+                        LB_SilentAssassin.ForeColor = Color.Red;
+                    }
                     LB_MapName.Text = "#" + mission.number + " " + mission.name;
                     LB_Time.Text = TimeSpan.FromSeconds(mission.time).ToString(@"mm\:ss\.f");
                     NB_ShotsFired.Text = mission.statistics.nbShotsFired.ToString();
