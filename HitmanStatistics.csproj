@@ -94,6 +94,7 @@
     <Compile Include="FormAbout.Designer.cs">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameHitmanBloodMoney.cs" />
     <Compile Include="GameHitmanContracts.cs" />
     <Compile Include="GameHitman2SA.cs" />
     <Compile Include="IGame.cs" />

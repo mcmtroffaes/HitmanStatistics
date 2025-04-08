@@ -3,15 +3,16 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace HitmanStatistics {
     public partial class FormMain : Form {
-        readonly static IGame[] games = { new GameHitman2SA(), new GameHitmanContracts() };
+        readonly static IGame[] games = { new GameHitman2SA(), new GameHitmanContracts(), new GameHitmanBloodMoney() };
 
         // State variables.
         int myHandle;
         IGame game;
-        bool isSilentAssassin;  // keep track to avoid overwriting image which causes "glitch"
+        bool? isSilentAssassin;  // keep track to avoid overwriting image which causes "glitch"
 
         public FormMain() {
             InitializeComponent();
@@ -52,31 +53,15 @@ namespace HitmanStatistics {
             if (myHandle != 0) {
                 Logger.Log("checking mission data...");
                 Mission mission = game.Mission(myHandle);
-                if (mission.number != 0)
+                if (mission != null)
                 {
-                    if (isSilentAssassin && !mission.isSilentAssassin)
-                    {
-                        isSilentAssassin = false;
-                        IMG_SA.BackgroundImage = Properties.Resources.No;
-                        LB_SilentAssassin.ForeColor = Color.Red;
-                    }
-                    if (!isSilentAssassin && mission.isSilentAssassin)
-                    {
-                        // this might happen if shots fired briefly points at wrong value causing brief (yet invalid) loss of silent assassin rating
-                        isSilentAssassin = true;
-                        IMG_SA.BackgroundImage = Properties.Resources.Yes;
-                        LB_SilentAssassin.ForeColor = Color.Green;
+                    if (isSilentAssassin != mission.isSilentAssassin) {
+                        isSilentAssassin = mission.isSilentAssassin;
+                        UpdateSilentAssassinStatus();
                     }
                     LB_MapName.Text = "#" + mission.number + " " + mission.name;
                     LB_Time.Text = TimeSpan.FromSeconds(mission.time).ToString(@"mm\:ss\.f");
-                    NB_ShotsFired.Text = mission.statistics.nbShotsFired.ToString();
-                    NB_CloseEncounters.Text = mission.statistics.nbCloseEncounters.ToString();
-                    NB_Headshots.Text = mission.statistics.nbHeadshots.ToString();
-                    NB_Alerts.Text = mission.statistics.nbAlerts.ToString();
-                    NB_EnemiesKilled.Text = mission.statistics.nbEnemiesK.ToString();
-                    NB_EnemiesHarmed.Text = mission.statistics.nbEnemiesH.ToString();
-                    NB_InnocentsKilled.Text = mission.statistics.nbInnocentsK.ToString();
-                    NB_InnocentsHarmed.Text = mission.statistics.nbInnocentsH.ToString();
+                    UpdateStatistics(mission.statistics);
                 }
                 else
                 {
@@ -88,24 +73,80 @@ namespace HitmanStatistics {
             }
         }
 
+        private void UpdateStatistics(Statistics statistics)
+        {
+            if (statistics != null)
+            {
+                LB_ShotsFired.Text = "Shots Fired";
+                NB_ShotsFired.Text = statistics.nbShotsFired.ToString();
+                LB_CloseEncounters.Text = "Close Encounters";
+                NB_CloseEncounters.Text = statistics.nbCloseEncounters.ToString();
+                LB_Headshots.Text = "Headshots";
+                NB_Headshots.Text = statistics.nbHeadshots.ToString();
+                LB_Alerts.Text = "Alerts";
+                NB_Alerts.Text = statistics.nbAlerts.ToString();
+                LB_EnemiesKilled.Text = "Enemies Killed";
+                NB_EnemiesKilled.Text = statistics.nbEnemiesK.ToString();
+                LB_EnemiesHarmed.Text = "Enemies Harmed";
+                NB_EnemiesHarmed.Text = statistics.nbEnemiesH.ToString();
+                LB_InnocentsKilled.Text = "Innocents Killed";
+                NB_InnocentsKilled.Text = statistics.nbInnocentsK.ToString();
+                LB_InnocentsHarmed.Text = "Innocents Harmed";
+                NB_InnocentsHarmed.Text = statistics.nbInnocentsH.ToString();
+            }
+            else
+            {
+                LB_ShotsFired.Text = "";
+                NB_ShotsFired.Text = "";
+                NB_CloseEncounters.Text = "";
+                LB_CloseEncounters.Text = "";
+                LB_Headshots.Text = "";
+                NB_Headshots.Text = "";
+                LB_Alerts.Text = "";
+                NB_Alerts.Text = "";
+                LB_EnemiesKilled.Text = "";
+                NB_EnemiesKilled.Text = "";
+                LB_EnemiesHarmed.Text = "";
+                NB_EnemiesHarmed.Text = "";
+                LB_InnocentsKilled.Text = "";
+                NB_InnocentsKilled.Text = "";
+                NB_InnocentsHarmed.Text = "";
+                LB_InnocentsHarmed.Text = "";
+            }
+        }
+
+        private void UpdateSilentAssassinStatus()
+        {
+            if (isSilentAssassin.HasValue)
+            {
+                if (!isSilentAssassin.Value)
+                {
+                    IMG_SA.BackgroundImage = Properties.Resources.No;
+                    LB_SilentAssassin.Text = "Silent Assassin";
+                    LB_SilentAssassin.ForeColor = Color.Red;
+                }
+                else
+                {
+                    IMG_SA.BackgroundImage = Properties.Resources.Yes;
+                    LB_SilentAssassin.Text = "Silent Assassin";
+                    LB_SilentAssassin.ForeColor = Color.Green;
+                }
+            }
+            else
+            {
+                IMG_SA.BackgroundImage = null;
+                LB_SilentAssassin.Text = "";
+            }
+
+        }
+
         // Used to reset all the values
         private void ResetValues() {
             LB_MapName.Text = "No Mission Active";
-            LB_Time.Text = "00:00.0";
-            NB_ShotsFired.Text = "0";
-            NB_CloseEncounters.Text = "0";
-            NB_Headshots.Text = "0";
-            NB_Alerts.Text = "0";
-            NB_EnemiesKilled.Text = "0";
-            NB_EnemiesHarmed.Text = "0";
-            NB_InnocentsKilled.Text = "0";
-            NB_InnocentsHarmed.Text = "0";
-            if (!isSilentAssassin)
-            {
-                isSilentAssassin = true;
-                IMG_SA.BackgroundImage = Properties.Resources.Yes;
-                LB_SilentAssassin.ForeColor = Color.Green;
-            }
+            LB_Time.Text = "";
+            UpdateStatistics(null);
+            isSilentAssassin = null;
+            UpdateSilentAssassinStatus();
         }
 
         // Open a web page to the latest version of the tracker

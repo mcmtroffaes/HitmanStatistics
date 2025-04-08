@@ -128,6 +128,6 @@ public class GameHitmanContracts : IGame
                 Logger.Log($"map pointer number: {mapPointerNumber}");
             }
         }
-        return new Mission();
+        return null;
     }
 }

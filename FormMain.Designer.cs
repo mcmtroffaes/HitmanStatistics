@@ -119,7 +119,7 @@
             this.LB_CloseEncounters.Name = "LB_CloseEncounters";
             this.LB_CloseEncounters.Size = new System.Drawing.Size(332, 46);
             this.LB_CloseEncounters.TabIndex = 8;
-            this.LB_CloseEncounters.Text = "Close encounters";
+            this.LB_CloseEncounters.Text = "Close Encounters";
             // 
             // NB_Alerts
             // 

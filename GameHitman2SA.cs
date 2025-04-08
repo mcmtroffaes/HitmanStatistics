@@ -112,6 +112,6 @@ public class GameHitman2SA : IGame
                 }
             }
         }
-        return new Mission();
+        return null;
     }
 }
