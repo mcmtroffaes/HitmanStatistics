@@ -7,7 +7,7 @@ public class GameHitmanBloodMoney : IGame
     // steam addresses from https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/StatModules/HM3/Src/HM3/HM3Pointers.cpp
     private const int baseAddress = 0x00400000;
     private const int statsPtr = 0x005B2538;
-    private const int difficultyPtr = 0x0041F83C;
+    private const int gamedataPtr = 0x0041F83C;
     private const int timePtr = 0x0041F820;
     // offsets from https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/StatModules/HM3/Src/HM3/Structs/HM3Stats.h
     private const int offsetRating1 = 0x0004; 
@@ -144,10 +144,17 @@ public class GameHitmanBloodMoney : IGame
             // 0x48 from https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/StatModules/HM3/Src/HM3/HM3Pointers.cpp
             int missionTime = Trainer.ReadPointerInteger(Handle, baseAddress + timePtr, new int[1] { 0x48 });
             Logger.Log($"mission time: {missionTime}");
+            // suit detection
+            // https://github.com/OrfeasZ/Statman/blob/a3df06ca0f3004ec4117baaa41c05c90463053a3/StatModules/HM3/Src/HM3/Hooks/ZHM3LevelControl_FrameUpdate.cpp#L70
+            // https://github.com/OrfeasZ/Statman/blob/a3df06ca0f3004ec4117baaa41c05c90463053a3/StatModules/HM3/Src/HM3/Structs/ZHM3GameData.h
+            // https://github.com/OrfeasZ/Statman/blob/a3df06ca0f3004ec4117baaa41c05c90463053a3/StatModules/HM3/Src/HM3/Structs/ZHM3Actor.h#L857
+            int current_suit = Trainer.ReadPointerInteger(Handle, baseAddress + gamedataPtr, new int[2] { 0x0A40, 0x0FD0 });
+            int starting_suit = Trainer.ReadPointerInteger(Handle, baseAddress + gamedataPtr, new int[2] { 0x0A40, 0x0FD4 });
+            int suit_left_on_level = (current_suit == starting_suit) ? 0 : 1;
             // order must match index values
             int[] stats = new int[] {
                 // 0x6664 from https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/StatModules/HM3/Src/HM3/HM3Pointers.cpp
-                Trainer.ReadPointerInteger(Handle, baseAddress + difficultyPtr, new int[1] { 0x6664 }),
+                Trainer.ReadPointerInteger(Handle, baseAddress + gamedataPtr, new int[1] { 0x6664 }),
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetInnocentsKilled),
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetInnocentsWounded),
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetEnemiesKilled),
@@ -162,7 +169,7 @@ public class GameHitmanBloodMoney : IGame
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetWitnesses),
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetCameraCaught),
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetCustomWeaponsLeftOnLevel),
-                Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetSuitLeftOnLevel)
+                suit_left_on_level
             };
             return new Mission(0, "", missionTime / 1024.0F, stats, IsSilentAssassin(stats));
         }
