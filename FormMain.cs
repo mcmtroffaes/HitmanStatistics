@@ -59,9 +59,16 @@ namespace HitmanStatistics {
                         isSilentAssassin = mission.isSilentAssassin;
                         UpdateSilentAssassinStatus();
                     }
-                    LB_MapName.Text = "#" + mission.number + " " + mission.name;
+                    if (mission.name != "")
+                    {
+                        LB_MapName.Text = "#" + mission.number + " " + mission.name;
+                    }
+                    else
+                    {
+                        LB_MapName.Text = "";
+                    }
                     LB_Time.Text = TimeSpan.FromSeconds(mission.time).ToString(@"mm\:ss\.f");
-                    UpdateStatistics(mission.statistics);
+                    UpdateStatistics(game.StatisticsNames(), mission.statistics);
                 }
                 else
                 {
@@ -73,46 +80,52 @@ namespace HitmanStatistics {
             }
         }
 
-        private void UpdateStatistics(Statistics statistics)
+        private string StatisticsLabel(int index, string[] names, int[] statistics)
         {
-            if (statistics != null)
-            {
-                LB_ShotsFired.Text = "Shots Fired";
-                NB_ShotsFired.Text = statistics.nbShotsFired.ToString();
-                LB_CloseEncounters.Text = "Close Encounters";
-                NB_CloseEncounters.Text = statistics.nbCloseEncounters.ToString();
-                LB_Headshots.Text = "Headshots";
-                NB_Headshots.Text = statistics.nbHeadshots.ToString();
-                LB_Alerts.Text = "Alerts";
-                NB_Alerts.Text = statistics.nbAlerts.ToString();
-                LB_EnemiesKilled.Text = "Enemies Killed";
-                NB_EnemiesKilled.Text = statistics.nbEnemiesK.ToString();
-                LB_EnemiesHarmed.Text = "Enemies Harmed";
-                NB_EnemiesHarmed.Text = statistics.nbEnemiesH.ToString();
-                LB_InnocentsKilled.Text = "Innocents Killed";
-                NB_InnocentsKilled.Text = statistics.nbInnocentsK.ToString();
-                LB_InnocentsHarmed.Text = "Innocents Harmed";
-                NB_InnocentsHarmed.Text = statistics.nbInnocentsH.ToString();
-            }
-            else
-            {
-                LB_ShotsFired.Text = "";
-                NB_ShotsFired.Text = "";
-                NB_CloseEncounters.Text = "";
-                LB_CloseEncounters.Text = "";
-                LB_Headshots.Text = "";
-                NB_Headshots.Text = "";
-                LB_Alerts.Text = "";
-                NB_Alerts.Text = "";
-                LB_EnemiesKilled.Text = "";
-                NB_EnemiesKilled.Text = "";
-                LB_EnemiesHarmed.Text = "";
-                NB_EnemiesHarmed.Text = "";
-                LB_InnocentsKilled.Text = "";
-                NB_InnocentsKilled.Text = "";
-                NB_InnocentsHarmed.Text = "";
-                LB_InnocentsHarmed.Text = "";
-            }
+            return (statistics != null && statistics.Length > index) ? names[index] : "";
+        }
+
+        private string StatisticsValue(int index, int[] statistics)
+        {
+            return (statistics != null && statistics.Length > index) ? statistics[index].ToString() : "";
+        }
+
+        private void UpdateStatistics(string[] names, int[] statistics)
+        {
+            LB_ShotsFired.Text = StatisticsLabel(0, names, statistics);
+            NB_ShotsFired.Text = StatisticsValue(0, statistics);
+            LB_CloseEncounters.Text = StatisticsLabel(1, names, statistics);
+            NB_CloseEncounters.Text = StatisticsValue(1, statistics);
+            LB_Headshots.Text = StatisticsLabel(2, names, statistics);
+            NB_Headshots.Text = StatisticsValue(2, statistics);
+            LB_Alerts.Text = StatisticsLabel(3, names, statistics);
+            NB_Alerts.Text = StatisticsValue(3, statistics);
+            LB_EnemiesKilled.Text = StatisticsLabel(4, names, statistics); 
+            NB_EnemiesKilled.Text = StatisticsValue(4, statistics);
+            LB_EnemiesHarmed.Text = StatisticsLabel(5, names, statistics); 
+            NB_EnemiesHarmed.Text = StatisticsValue(5, statistics);
+            LB_InnocentsKilled.Text = StatisticsLabel(6, names, statistics); 
+            NB_InnocentsKilled.Text = StatisticsValue(6,statistics);
+            LB_InnocentsHarmed.Text = StatisticsLabel(7, names, statistics);
+            NB_InnocentsHarmed.Text = StatisticsValue(7, statistics);
+            LB_Item8.Text = StatisticsLabel(8, names, statistics);
+            NB_Item8.Text = StatisticsValue(8, statistics);
+            LB_Item9.Text = StatisticsLabel(9, names, statistics);
+            NB_Item9.Text = StatisticsValue(9, statistics);
+            LB_Item10.Text = StatisticsLabel(10, names, statistics);
+            NB_Item10.Text = StatisticsValue(10, statistics);
+            LB_Item11.Text = StatisticsLabel(11, names, statistics);
+            NB_Item11.Text = StatisticsValue(11, statistics);
+            LB_Item12.Text = StatisticsLabel(12, names, statistics);
+            NB_Item12.Text = StatisticsValue(12, statistics);
+            LB_Item13.Text = StatisticsLabel(13, names, statistics);
+            NB_Item13.Text = StatisticsValue(13, statistics);
+            LB_Item14.Text = StatisticsLabel(14, names, statistics);
+            NB_Item14.Text = StatisticsValue(14, statistics);
+            LB_Item15.Text = StatisticsLabel(15, names, statistics);
+            NB_Item15.Text = StatisticsValue(15, statistics);
+            LB_Item16.Text = StatisticsLabel(16, names, statistics);
+            NB_Item16.Text = StatisticsValue(16, statistics);
         }
 
         private void UpdateSilentAssassinStatus()
@@ -144,7 +157,7 @@ namespace HitmanStatistics {
         private void ResetValues() {
             LB_MapName.Text = "No Mission Active";
             LB_Time.Text = "";
-            UpdateStatistics(null);
+            UpdateStatistics(null, null);
             isSilentAssassin = null;
             UpdateSilentAssassinStatus();
         }

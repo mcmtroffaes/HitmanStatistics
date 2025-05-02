@@ -35,34 +35,34 @@ public class GameHitman2SA : IGame
 
     // All the possible Silent Assassin combinations for Hitman 2
     // https://docs.google.com/spreadsheets/d/1i6dmzcBROqoJlsQjUGY8wxdqwxt2hXzjB9fPVggTf2k/edit?gid=1074822823#gid=1074822823
-    private readonly static Statistics[] validSACombination = {
-        new Statistics(0, 1, 0, 0, 1, 2, 0, 0),
-        new Statistics(0, 1, 0, 0, 0, 5, 0, 0),
-        new Statistics(0, 1, 0, 0, 0, 2, 0, 1),
-        new Statistics(0, 0, 0, 1, 2, 0, 0, 0),
-        new Statistics(0, 0, 0, 1, 1, 3, 0, 0),
-        new Statistics(0, 0, 0, 1, 1, 0, 0, 1),
-        new Statistics(0, 0, 0, 1, 0, 6, 0, 0),
-        new Statistics(0, 0, 0, 1, 0, 3, 0, 1),
-        new Statistics(0, 0, 0, 1, 0, 0, 1, 0),
-        new Statistics(0, 0, 0, 1, 0, 0, 0, 2),
-        new Statistics(0, 0, 0, 0, 1, 0, 0, 1),
-        new Statistics(1, 1, 1, 0, 0, 2, 0, 0),
-        new Statistics(1, 1, 0, 0, 1, 0, 0, 0),
-        new Statistics(1, 1, 0, 0, 0, 3, 0, 0),
-        new Statistics(1, 1, 0, 0, 0, 0, 0, 1),
-        new Statistics(1, 0, 1, 1, 1, 0, 0, 0),
-        new Statistics(1, 0, 1, 1, 0, 3, 0, 0),
-        new Statistics(1, 0, 1, 1, 0, 0, 0, 1),
-        new Statistics(1, 0, 0, 1, 1, 1, 0, 0),
-        new Statistics(1, 0, 0, 1, 0, 4, 0, 0),
-        new Statistics(1, 0, 0, 1, 0, 1, 0, 1),
-        new Statistics(1, 0, 0, 0, 1, 1, 0, 0),
-        new Statistics(2, 1, 1, 0, 0, 0, 0, 0),
-        new Statistics(2, 1, 0, 0, 0, 1, 0, 0),
-        new Statistics(2, 0, 2, 1, 0, 0, 0, 0),
-        new Statistics(2, 0, 1, 1, 0, 1, 0, 0),
-        new Statistics(3, 0, 0, 1, 0, 0, 0, 0)
+    private readonly static int[][] validSACombination = {
+        new int[] { 0, 1, 0, 0, 1, 2, 0, 0 },
+        new int[] { 0, 1, 0, 0, 0, 5, 0, 0 },
+        new int[] { 0, 1, 0, 0, 0, 2, 0, 1 },
+        new int[] { 0, 0, 0, 1, 2, 0, 0, 0 },
+        new int[] { 0, 0, 0, 1, 1, 3, 0, 0 },
+        new int[] { 0, 0, 0, 1, 1, 0, 0, 1 },
+        new int[] { 0, 0, 0, 1, 0, 6, 0, 0 },
+        new int[] { 0, 0, 0, 1, 0, 3, 0, 1 },
+        new int[] { 0, 0, 0, 1, 0, 0, 1, 0 },
+        new int[] { 0, 0, 0, 1, 0, 0, 0, 2 },
+        new int[] { 0, 0, 0, 0, 1, 0, 0, 1 },
+        new int[] { 1, 1, 1, 0, 0, 2, 0, 0 },
+        new int[] { 1, 1, 0, 0, 1, 0, 0, 0 },
+        new int[] { 1, 1, 0, 0, 0, 3, 0, 0 },
+        new int[] { 1, 1, 0, 0, 0, 0, 0, 1 },
+        new int[] { 1, 0, 1, 1, 1, 0, 0, 0 },
+        new int[] { 1, 0, 1, 1, 0, 3, 0, 0 },
+        new int[] { 1, 0, 1, 1, 0, 0, 0, 1 },
+        new int[] { 1, 0, 0, 1, 1, 1, 0, 0 },
+        new int[] { 1, 0, 0, 1, 0, 4, 0, 0 },
+        new int[] { 1, 0, 0, 1, 0, 1, 0, 1 },
+        new int[] { 1, 0, 0, 0, 1, 1, 0, 0 },
+        new int[] { 2, 1, 1, 0, 0, 0, 0, 0 },
+        new int[] { 2, 1, 0, 0, 0, 1, 0, 0 },
+        new int[] { 2, 0, 2, 1, 0, 0, 0, 0 },
+        new int[] { 2, 0, 1, 1, 0, 1, 0, 0 },
+        new int[] { 3, 0, 0, 1, 0, 0, 0, 0 }
     };
 
     public string Name()
@@ -73,6 +73,20 @@ public class GameHitman2SA : IGame
     public string ProcessName()
     {
         return "hitman2";
+    }
+
+    public string[] StatisticsNames()
+    {
+        return new string[] {
+            "Shots Fired",
+            "Close Encounters",
+            "Headshots",
+            "Alerts",
+            "Enemies Killed",
+            "Enemies Wounded",
+            "Innocents Killed",
+            "Innocents Wounded",
+        };
     }
 
     public bool IsRunning(int Handle)
@@ -95,23 +109,27 @@ public class GameHitman2SA : IGame
                 if (missionTime != 0)
                 {
                     int mapSecondOffset = secondOffset[mapNumber - 1];
-                    Statistics stats = new Statistics(
-                        sf: Trainer.ReadPointerInteger(Handle, baseAddress + 0x03981C, new int[3] { 0x12C, 0x8C, 0x11C7 }),  // note: mostly works, but sometimes briefly glitches out
-                        ce: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x220 }),
-                        hs: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x208 }),
-                        al: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x21C }),
-                        ek: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x210 }),
-                        eh: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x20C }),
-                        ik: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x218 }),
-                        ih: Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x214 })
-                    );
+                    int[] stats = new int[] {
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x03981C, new int[3] { 0x12C, 0x8C, 0x11C7 }),  // note: mostly works, but sometimes briefly glitches out
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x220 }),
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x208 }),
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x21C }),
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x210 }),
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x20C }),
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x218 }),
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x214 })
+                    };
                     Logger.Log($"stats: {stats}");
-                    bool isSilentAssassin = validSACombination.Any(combination => stats.IsLessOrEqualTo(combination));
+                    bool isSilentAssassin = validSACombination.Any(combination => IsLessOrEqualTo(stats, combination));
                     Logger.Log($"silent assassin: {isSilentAssassin}");
                     return new Mission(mapNumber, mapName, missionTime / 60.0F, stats, isSilentAssassin);
                 }
             }
         }
         return null;
+    }
+
+    private bool IsLessOrEqualTo(int[] stats1, int[] stats2) {
+        return stats1.Zip(stats2, (v1, v2) => v1 <= v2).All(x => x);
     }
 }

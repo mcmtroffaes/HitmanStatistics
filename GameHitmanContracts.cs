@@ -39,34 +39,34 @@ public class GameHitmanContracts : IGame
 
     // All the possible Silent Assassin combinations for Hitman Contracts
     // https://docs.google.com/spreadsheets/d/1i6dmzcBROqoJlsQjUGY8wxdqwxt2hXzjB9fPVggTf2k/edit?gid=1074822823#gid=1074822823
-    private static readonly Statistics[] validSACombination = {
-        new Statistics(999, 0, 999, 1, 0, 0, 0, 0),
-        new Statistics(2, 1, 1, 0, 0, 0, 0, 0),
-        new Statistics(2, 1, 0, 0, 0, 1, 0, 0),
-        new Statistics(2, 0, 1, 1, 0, 1, 0, 0),
-        new Statistics(2, 0, 0, 0, 0, 2, 0, 0),
-        new Statistics(1, 1, 1, 0, 0, 2, 0, 0),
-        new Statistics(1, 1, 0, 0, 1, 0, 0, 0),
-        new Statistics(1, 1, 0, 0, 0, 3, 0, 0),
-        new Statistics(1, 0, 1, 1, 1, 0, 0, 0),
-        new Statistics(1, 0, 1, 1, 0, 3, 0, 0),
-        new Statistics(1, 0, 0, 1, 1, 1, 0, 0),
-        new Statistics(1, 0, 0, 1, 0, 4, 0, 0),
-        new Statistics(0, 1, 0, 0, 1, 2, 0, 0),
-        new Statistics(0, 1, 0, 0, 0, 5, 0, 0),
-        new Statistics(0, 0, 0, 1, 1, 3, 0, 0),
-        new Statistics(0, 0, 0, 1, 2, 0, 0, 0),
-        new Statistics(0, 0, 0, 1, 0, 6, 0, 0)
+    private static readonly int[][] validSACombination = {
+        new int[] { 999, 0, 999, 1, 0, 0, 0, 0 },
+        new int[] { 2, 1, 1, 0, 0, 0, 0, 0 },
+        new int[] { 2, 1, 0, 0, 0, 1, 0, 0 },
+        new int[] { 2, 0, 1, 1, 0, 1, 0, 0 },
+        new int[] { 2, 0, 0, 0, 0, 2, 0, 0 },
+        new int[] { 1, 1, 1, 0, 0, 2, 0, 0 },
+        new int[] { 1, 1, 0, 0, 1, 0, 0, 0 },
+        new int[] { 1, 1, 0, 0, 0, 3, 0, 0 },
+        new int[] { 1, 0, 1, 1, 1, 0, 0, 0 },
+        new int[] { 1, 0, 1, 1, 0, 3, 0, 0 },
+        new int[] { 1, 0, 0, 1, 1, 1, 0, 0 },
+        new int[] { 1, 0, 0, 1, 0, 4, 0, 0 },
+        new int[] { 0, 1, 0, 0, 1, 2, 0, 0 },
+        new int[] { 0, 1, 0, 0, 0, 5, 0, 0 },
+        new int[] { 0, 0, 0, 1, 1, 3, 0, 0 },
+        new int[] { 0, 0, 0, 1, 2, 0, 0, 0 },
+        new int[] { 0, 0, 0, 1, 0, 6, 0, 0 }
     };
-    private static readonly Statistics[] validSACombinationMap1 = {
-        new Statistics(999, 0, 0, 1, 0, 0, 0, 0),
-        new Statistics(2, 0, 0, 0, 0, 2, 0, 0),
-        new Statistics(1, 0, 1, 1, 1, 0, 0, 0),
-        new Statistics(1, 0, 0, 1, 1, 1, 0, 0),
-        new Statistics(1, 0, 0, 1, 0, 4, 0, 0),
-        new Statistics(0, 0, 0, 1, 1, 3, 0, 0),
-        new Statistics(0, 0, 0, 1, 2, 0, 0, 0),
-        new Statistics(0, 0, 0, 1, 0, 6, 0, 0)
+    private static readonly int[][] validSACombinationMap1 = {
+        new int[] { 999, 0, 0, 1, 0, 0, 0, 0 },
+        new int[] { 2, 0, 0, 0, 0, 2, 0, 0 },
+        new int[] { 1, 0, 1, 1, 1, 0, 0, 0 },
+        new int[] { 1, 0, 0, 1, 1, 1, 0, 0 },
+        new int[] { 1, 0, 0, 1, 0, 4, 0, 0 },
+        new int[] { 0, 0, 0, 1, 1, 3, 0, 0 },
+        new int[] { 0, 0, 0, 1, 2, 0, 0, 0 },
+        new int[] { 0, 0, 0, 1, 0, 6, 0, 0 }
     };
 
     int mapPointerNumber = 0;
@@ -79,6 +79,20 @@ public class GameHitmanContracts : IGame
     public string ProcessName()
     {
         return "HitmanContracts";
+    }
+
+    public string[] StatisticsNames()
+    {
+        return new string[] {
+            "Shots Fired",
+            "Close Encounters",
+            "Headshots",
+            "Alerts",
+            "Enemies Killed",
+            "Enemies Wounded",
+            "Innocents Killed",
+            "Innocents Wounded",
+        };
     }
 
     public bool IsRunning(int Handle)
@@ -100,21 +114,21 @@ public class GameHitmanContracts : IGame
                 Logger.Log($"mission time: {missionTime}");
                 if (missionTime != 0)
                 {
-                    Statistics stats = new Statistics(
-                        sf: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F }),
-                        ce: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB2F }),
-                        hs: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB17 }),
-                        al: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB2B }),
-                        ek: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB1F }),
-                        eh: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB1B }),
-                        ik: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB27 }),
-                        ih: Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB23 })
-                    );
+                    int[] stats = new int[] {
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947B0, new int[3] { 0xBA0, 0x104, 0x82F }),  // shots fired
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB2F }),  // close encounters
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB17 }),  // headshots
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB2B }),  // alerts
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB1F }),  // enemies killed
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB1B }),  // enemies wounded
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB27 }),  // innocents killed
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x3947C0, new int[1] { 0xB23 })  // innocents wounded
+                    };
                     Logger.Log($"stats: {stats}");
                     bool isSilentAssassin =
                         mapNumber != 1
-                        ? validSACombination.Any(combination => stats.IsLessOrEqualTo(combination))
-                        : validSACombinationMap1.Any(combination => stats.IsLessOrEqualTo(combination));
+                        ? validSACombination.Any(combination => IsLessOrEqualTo(stats, combination))
+                        : validSACombinationMap1.Any(combination => IsLessOrEqualTo(stats, combination));
                     Logger.Log($"silent assassin: {isSilentAssassin}");
                     return new Mission(mapNumber, mapName, missionTime, stats, isSilentAssassin);
                 }
@@ -129,5 +143,10 @@ public class GameHitmanContracts : IGame
             }
         }
         return null;
+    }
+
+    private bool IsLessOrEqualTo(int[] stats1, int[] stats2)
+    {
+        return stats1.Zip(stats2, (v1, v2) => v1 <= v2).All(x => x);
     }
 }

@@ -3,7 +3,7 @@
     public readonly int number;
     public readonly string name;
     public readonly float time;
-    public readonly Statistics statistics;
+    public readonly int[] statistics;
     public readonly bool? isSilentAssassin;
 
     public Mission()
@@ -15,7 +15,7 @@
         isSilentAssassin = null;
     }
 
-    public Mission(int number, string name, float time, Statistics statistics, bool? isSilentAssassin)
+    public Mission(int number, string name, float time, int[] statistics, bool? isSilentAssassin)
     {
         this.number = number;
         this.name = name;
@@ -34,6 +34,7 @@ interface IGame
 {
     string Name();
     string ProcessName();
+    string[] StatisticsNames();
     bool IsRunning(int Handle);
     Mission Mission(int Handle);
 }
