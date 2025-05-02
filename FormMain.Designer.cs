@@ -327,21 +327,21 @@
             this.Menu_About});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(432, 40);
+            this.MainMenu.Size = new System.Drawing.Size(432, 48);
             this.MainMenu.TabIndex = 34;
             this.MainMenu.Text = "menuStrip1";
             // 
             // Menu_Update
             // 
             this.Menu_Update.Name = "Menu_Update";
-            this.Menu_Update.Size = new System.Drawing.Size(111, 36);
+            this.Menu_Update.Size = new System.Drawing.Size(111, 44);
             this.Menu_Update.Text = "Update";
             this.Menu_Update.Click += new System.EventHandler(this.Menu_Update_Click);
             // 
             // Menu_About
             // 
             this.Menu_About.Name = "Menu_About";
-            this.Menu_About.Size = new System.Drawing.Size(99, 36);
+            this.Menu_About.Size = new System.Drawing.Size(99, 44);
             this.Menu_About.Text = "About";
             this.Menu_About.Click += new System.EventHandler(this.Menu_About_Click);
             // 
@@ -392,9 +392,9 @@
             this.LB_Item15.Location = new System.Drawing.Point(16, 860);
             this.LB_Item15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item15.Name = "LB_Item15";
-            this.LB_Item15.Size = new System.Drawing.Size(112, 37);
+            this.LB_Item15.Size = new System.Drawing.Size(27, 37);
             this.LB_Item15.TabIndex = 51;
-            this.LB_Item15.Text = "Item15";
+            this.LB_Item15.Text = "-";
             // 
             // NB_Item13
             // 
@@ -416,9 +416,9 @@
             this.LB_Item13.Location = new System.Drawing.Point(16, 786);
             this.LB_Item13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item13.Name = "LB_Item13";
-            this.LB_Item13.Size = new System.Drawing.Size(112, 37);
+            this.LB_Item13.Size = new System.Drawing.Size(27, 37);
             this.LB_Item13.TabIndex = 49;
-            this.LB_Item13.Text = "Item13";
+            this.LB_Item13.Text = "-";
             // 
             // NB_Item10
             // 
@@ -440,9 +440,9 @@
             this.LB_Item10.Location = new System.Drawing.Point(15, 675);
             this.LB_Item10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item10.Name = "LB_Item10";
-            this.LB_Item10.Size = new System.Drawing.Size(112, 37);
+            this.LB_Item10.Size = new System.Drawing.Size(27, 37);
             this.LB_Item10.TabIndex = 47;
-            this.LB_Item10.Text = "Item10";
+            this.LB_Item10.Text = "-";
             // 
             // NB_Item14
             // 
@@ -464,9 +464,9 @@
             this.LB_Item14.Location = new System.Drawing.Point(16, 823);
             this.LB_Item14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item14.Name = "LB_Item14";
-            this.LB_Item14.Size = new System.Drawing.Size(112, 37);
+            this.LB_Item14.Size = new System.Drawing.Size(27, 37);
             this.LB_Item14.TabIndex = 45;
-            this.LB_Item14.Text = "Item14";
+            this.LB_Item14.Text = "-";
             // 
             // NB_Item12
             // 
@@ -488,9 +488,9 @@
             this.LB_Item12.Location = new System.Drawing.Point(15, 749);
             this.LB_Item12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item12.Name = "LB_Item12";
-            this.LB_Item12.Size = new System.Drawing.Size(112, 37);
+            this.LB_Item12.Size = new System.Drawing.Size(27, 37);
             this.LB_Item12.TabIndex = 43;
-            this.LB_Item12.Text = "Item12";
+            this.LB_Item12.Text = "-";
             // 
             // NB_Item11
             // 
@@ -512,9 +512,9 @@
             this.LB_Item11.Location = new System.Drawing.Point(16, 712);
             this.LB_Item11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item11.Name = "LB_Item11";
-            this.LB_Item11.Size = new System.Drawing.Size(110, 37);
+            this.LB_Item11.Size = new System.Drawing.Size(27, 37);
             this.LB_Item11.TabIndex = 41;
-            this.LB_Item11.Text = "Item11";
+            this.LB_Item11.Text = "-";
             // 
             // NB_Item9
             // 
@@ -536,9 +536,9 @@
             this.LB_Item9.Location = new System.Drawing.Point(16, 637);
             this.LB_Item9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item9.Name = "LB_Item9";
-            this.LB_Item9.Size = new System.Drawing.Size(96, 37);
+            this.LB_Item9.Size = new System.Drawing.Size(27, 37);
             this.LB_Item9.TabIndex = 39;
-            this.LB_Item9.Text = "Item9";
+            this.LB_Item9.Text = "-";
             // 
             // NB_Item8
             // 
@@ -560,9 +560,9 @@
             this.LB_Item8.Location = new System.Drawing.Point(15, 600);
             this.LB_Item8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item8.Name = "LB_Item8";
-            this.LB_Item8.Size = new System.Drawing.Size(96, 37);
+            this.LB_Item8.Size = new System.Drawing.Size(27, 37);
             this.LB_Item8.TabIndex = 37;
-            this.LB_Item8.Text = "Item8";
+            this.LB_Item8.Text = "-";
             // 
             // NB_Item16
             // 
@@ -584,9 +584,9 @@
             this.LB_Item16.Location = new System.Drawing.Point(16, 897);
             this.LB_Item16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Item16.Name = "LB_Item16";
-            this.LB_Item16.Size = new System.Drawing.Size(112, 37);
+            this.LB_Item16.Size = new System.Drawing.Size(27, 37);
             this.LB_Item16.TabIndex = 53;
-            this.LB_Item16.Text = "Item16";
+            this.LB_Item16.Text = "-";
             // 
             // FormMain
             // 
