@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Runtime.InteropServices;
 
@@ -76,12 +77,6 @@ public class GameHitmanBloodMoney : IGame
     private const int offsetCustomSGSilenced = 0x0100; 
     private const int offsetCustomMGSilenced = 0x0104; 
     private const int offsetCustomSMGSilenced = 0x0108;
-    // https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/Statman/Engines/HM3/StatTracker.cs
-    private static readonly double[] statsMultipliers = {
-        0.0, 1.0, 1.5, 2.0, 2.5, 3.0, 3.25, 3.5, 3.75, 4.0, 4.1300001, 4.25, 4.3800001, 4.5, 4.6300001, 4.75,
-        4.8800001, 5.0, 5.0599999, 5.1300001, 5.1900001, 5.25, 5.3099999, 5.3800001, 5.4400001, 5.5, 5.5599999,
-        5.6300001, 5.6900001, 5.75, 5.8099999, 5.8800001, 5.9400001, 6.0
-    };
     private const int indexDifficulty = 0;
     private const int indexInnocentsKilled = 1;
     private const int indexInnocentsWounded = 2;
@@ -98,6 +93,13 @@ public class GameHitmanBloodMoney : IGame
     private const int indexCaughtOnCamera = 13;
     private const int indexCustomWeaponsLeft = 14;
     private const int indexSuitLeft = 15;
+    private readonly static Dictionary<int, string> difficultyMap = new Dictionary<int, string>()
+    {
+        { 0, "Rookie" },
+        { 1, "Normal" },
+        { 2, "Expert" },
+        { 3, "Pro" }
+    };
 
     public string Name()
     {
@@ -114,26 +116,26 @@ public class GameHitmanBloodMoney : IGame
         return Handle != 0 && Trainer.ReadPointerInteger(Handle, baseAddress) == 0x00905A4D;
     }
 
-    public string[] StatisticsNames()
+    public Tuple<string, Func<int, string>>[] StatisticsNames()
     {
         // order must match index values
-        return new string[] {
-            "Difficulty",
-            "Innocents Killed",
-            "Innocents Wounded",
-            "Enemies Killed",
-            "Enemies Wounded",
-            "Police Killed",
-            "Police Wounded",
-            "Frisk Failed",
-            "Cover Blown",
-            "Bodies Found",
-            "Target Bodies Fnd",
-            "Uncon Bodies Fnd",
-            "Witnesses",
-            "On Camera",
-            "Weapons Left",
-            "Suit Left"
+        return new Tuple<string, Func<int, string>>[] {
+            Tuple.Create("Difficulty", Utils.MapToString(difficultyMap)),
+            Tuple.Create("Innocents Killed", Utils.ValueToString),
+            Tuple.Create("Innocents Wounded", Utils.ValueToString),
+            Tuple.Create("Enemies Killed", Utils.ValueToString),
+            Tuple.Create("Enemies Wounded", Utils.ValueToString),
+            Tuple.Create("Police Killed", Utils.ValueToString),
+            Tuple.Create("Police Wounded", Utils.ValueToString),
+            Tuple.Create("Frisk Failed", Utils.ValueToString),
+            Tuple.Create("Cover Blown", Utils.ValueToString),
+            Tuple.Create("Bodies Found", Utils.ValueToString),
+            Tuple.Create("Target Bodies Fnd", Utils.ValueToString),
+            Tuple.Create("Uncon Bodies Fnd", Utils.ValueToString),
+            Tuple.Create("Witnesses", Utils.ValueToString),
+            Tuple.Create("On Camera", Utils.ValueToString),
+            Tuple.Create("Weapons Left", Utils.ValueToString),
+            Tuple.Create("Suit Left",  Utils.ValueToString)
         };
     }
 
@@ -171,51 +173,27 @@ public class GameHitmanBloodMoney : IGame
                 Trainer.ReadPointerInteger(Handle, baseAddress + statsPtr + offsetCustomWeaponsLeftOnLevel),
                 suit_left_on_level
             };
-            return new Mission(0, "", missionTime / 1024.0F, stats, IsSilentAssassin(stats));
+            return new Mission(0, "", missionTime / 1024.0F, stats, SilentAssassin(stats));
         }
         return null;
     }
 
-    private bool IsSilentAssassin(int[] stats)
+    private int SilentAssassin(int[] stats)
     {
-        return CalculateRating0(stats) == 0 && CalculateRating1(stats) == 0;
-    }
-
-    private double CalculateScoreFor(int value, int unit)
-    {
-        return statsMultipliers[value >= 34 ? 33 : value] * unit;
-    }
-
-    private int CalculateRatingFromScore(double score)
-    {
-        return (int)Math.Ceiling((Math.Round(score > 100.0 ? 100.0 : score) / 100.0) * 6.0);
-    }
-
-    // https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/Statman/Engines/HM3/StatTracker.cs
-    private int CalculateRating0(int[] stats)
-    {
-        return CalculateRatingFromScore(
-            CalculateScoreFor(stats[indexInnocentsKilled], 12)
-            + CalculateScoreFor(stats[indexInnocentsWounded], 6)
-            + CalculateScoreFor(stats[indexEnemiesKilled], 6)
-            + CalculateScoreFor(stats[indexEnemiesWounded], 3)
-            + CalculateScoreFor(stats[indexPoliceKilled], 9)
-            + CalculateScoreFor(stats[indexPoliceWounded], 5)
-        );
-    }
-
-    // https://github.com/OrfeasZ/Statman/blob/3f280f2fa5a2e2bdd18e15e0642c10cfcb3764f1/Statman/Engines/HM3/StatTracker.cs
-    private int CalculateRating1(int[] stats)
-    {
-        return CalculateRatingFromScore(
-            CalculateScoreFor(stats[indexFriskFailed], 6)
-            + CalculateScoreFor(stats[indexCoverBlown], 6)
-            + CalculateScoreFor(stats[indexBodiesFound] + ((stats[indexDifficulty] > 1) ? stats[indexTargetBodiesFound] : 0), 6)
-            + CalculateScoreFor(stats[indexUnconsciousBodiesFound], 6)
-            + CalculateScoreFor(stats[indexWitnesses], 8)
-            + CalculateScoreFor(stats[indexCaughtOnCamera], 10)
-            + ((stats[indexDifficulty] > 2) ? CalculateScoreFor((stats[indexCustomWeaponsLeft] > 0) ? 1 : 0, 5) : 0)
-            + ((stats[indexDifficulty] > 2) ? CalculateScoreFor(stats[indexSuitLeft], 5) : 0)
-        );
+        bool items_left_on_map = stats[indexDifficulty] > 2 && (stats[indexCustomWeaponsLeft] != 0 || stats[indexSuitLeft] != 0);
+        return (
+            stats[indexInnocentsKilled] != 0
+            || stats[indexInnocentsWounded] != 0
+            || stats[indexEnemiesKilled] != 0
+            || stats[indexPoliceKilled] != 0
+            || stats[indexPoliceWounded] != 0
+            || stats[indexFriskFailed] != 0
+            || stats[indexCoverBlown] != 0
+            || stats[indexBodiesFound] != 0
+            || (stats[indexDifficulty] > 1 && stats[indexTargetBodiesFound] != 0)
+            || stats[indexUnconsciousBodiesFound] != 0
+            || stats[indexWitnesses] != 0
+            || stats[indexCaughtOnCamera] != 0
+        ) ? 2 : items_left_on_map ? 1 : 0;
     }
 }

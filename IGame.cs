@@ -1,10 +1,12 @@
-﻿public class Mission
+﻿using System;
+
+public class Mission
 {
     public readonly int number;
     public readonly string name;
     public readonly float time;
     public readonly int[] statistics;
-    public readonly bool? isSilentAssassin;
+    public readonly int silentAssassin;  // 0 = yes, 1 = maybe, 2 = no
 
     public Mission()
     {
@@ -12,21 +14,21 @@
         name = "";
         time = 0.0F;
         statistics = null;
-        isSilentAssassin = null;
+        silentAssassin = 0;
     }
 
-    public Mission(int number, string name, float time, int[] statistics, bool? isSilentAssassin)
+    public Mission(int number, string name, float time, int[] statistics, int silentAssassin)
     {
         this.number = number;
         this.name = name;
         this.time = time;
         this.statistics = statistics;
-        this.isSilentAssassin = isSilentAssassin;
+        this.silentAssassin = silentAssassin;
     }
 
     public override string ToString()
     {
-        return $"name: {name}, time: {time}, stats: {statistics}, silent assassin: {isSilentAssassin}";
+        return $"name: {name}, time: {time}, stats: {statistics}, silent assassin: {silentAssassin}";
     }
 };
 
@@ -34,7 +36,7 @@ interface IGame
 {
     string Name();
     string ProcessName();
-    string[] StatisticsNames();
+    Tuple<string, Func<int, string>>[] StatisticsNames();
     bool IsRunning(int Handle);
     Mission Mission(int Handle);
 }

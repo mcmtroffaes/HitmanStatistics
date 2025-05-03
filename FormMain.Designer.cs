@@ -49,9 +49,6 @@
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.Menu_Update = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_About = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.IMG_SA = new System.Windows.Forms.Panel();
             this.NB_Item15 = new System.Windows.Forms.Label();
             this.LB_Item15 = new System.Windows.Forms.Label();
             this.NB_Item13 = new System.Windows.Forms.Label();
@@ -70,6 +67,7 @@
             this.LB_Item8 = new System.Windows.Forms.Label();
             this.NB_Item16 = new System.Windows.Forms.Label();
             this.LB_Item16 = new System.Windows.Forms.Label();
+            this.NB_SilentAssassin = new System.Windows.Forms.Label();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,7 +95,7 @@
             this.LB_Running.Location = new System.Drawing.Point(13, 58);
             this.LB_Running.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_Running.Name = "LB_Running";
-            this.LB_Running.Size = new System.Drawing.Size(666, 53);
+            this.LB_Running.Size = new System.Drawing.Size(547, 53);
             this.LB_Running.TabIndex = 1;
             this.LB_Running.Text = "Game Not Running";
             this.LB_Running.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -229,7 +227,7 @@
             this.LB_MapName.Location = new System.Drawing.Point(13, 122);
             this.LB_MapName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.LB_MapName.Name = "LB_MapName";
-            this.LB_MapName.Size = new System.Drawing.Size(666, 61);
+            this.LB_MapName.Size = new System.Drawing.Size(547, 61);
             this.LB_MapName.TabIndex = 22;
             this.LB_MapName.Text = "No Mission Active";
             this.LB_MapName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -327,50 +325,23 @@
             this.Menu_About});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(432, 48);
+            this.MainMenu.Size = new System.Drawing.Size(560, 40);
             this.MainMenu.TabIndex = 34;
             this.MainMenu.Text = "menuStrip1";
             // 
             // Menu_Update
             // 
             this.Menu_Update.Name = "Menu_Update";
-            this.Menu_Update.Size = new System.Drawing.Size(111, 44);
+            this.Menu_Update.Size = new System.Drawing.Size(111, 36);
             this.Menu_Update.Text = "Update";
             this.Menu_Update.Click += new System.EventHandler(this.Menu_Update_Click);
             // 
             // Menu_About
             // 
             this.Menu_About.Name = "Menu_About";
-            this.Menu_About.Size = new System.Drawing.Size(99, 44);
+            this.Menu_About.Size = new System.Drawing.Size(99, 36);
             this.Menu_About.Text = "About";
             this.Menu_About.Click += new System.EventHandler(this.Menu_About_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = global::HitmanStatistics.Properties.Resources.Bar;
-            this.panel2.Location = new System.Drawing.Point(0, 50);
-            this.panel2.Margin = new System.Windows.Forms.Padding(6);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(431, 10);
-            this.panel2.TabIndex = 36;
-            // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::HitmanStatistics.Properties.Resources.Bar;
-            this.panel1.Location = new System.Drawing.Point(0, 110);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(431, 14);
-            this.panel1.TabIndex = 35;
-            // 
-            // IMG_SA
-            // 
-            this.IMG_SA.BackgroundImage = global::HitmanStatistics.Properties.Resources.Yes;
-            this.IMG_SA.Location = new System.Drawing.Point(318, 244);
-            this.IMG_SA.Margin = new System.Windows.Forms.Padding(6);
-            this.IMG_SA.Name = "IMG_SA";
-            this.IMG_SA.Size = new System.Drawing.Size(32, 31);
-            this.IMG_SA.TabIndex = 33;
             // 
             // NB_Item15
             // 
@@ -588,11 +559,25 @@
             this.LB_Item16.TabIndex = 53;
             this.LB_Item16.Text = "-";
             // 
+            // NB_SilentAssassin
+            // 
+            this.NB_SilentAssassin.AutoSize = true;
+            this.NB_SilentAssassin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NB_SilentAssassin.ForeColor = System.Drawing.Color.Green;
+            this.NB_SilentAssassin.Location = new System.Drawing.Point(313, 238);
+            this.NB_SilentAssassin.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.NB_SilentAssassin.Name = "NB_SilentAssassin";
+            this.NB_SilentAssassin.Size = new System.Drawing.Size(36, 37);
+            this.NB_SilentAssassin.TabIndex = 55;
+            this.NB_SilentAssassin.Tag = "Value";
+            this.NB_SilentAssassin.Text = "✓";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 949);
+            this.ClientSize = new System.Drawing.Size(560, 949);
+            this.Controls.Add(this.NB_SilentAssassin);
             this.Controls.Add(this.NB_Item16);
             this.Controls.Add(this.LB_Item16);
             this.Controls.Add(this.NB_Item15);
@@ -611,9 +596,6 @@
             this.Controls.Add(this.LB_Item9);
             this.Controls.Add(this.NB_Item8);
             this.Controls.Add(this.LB_Item8);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.IMG_SA);
             this.Controls.Add(this.LB_SilentAssassin);
             this.Controls.Add(this.NB_InnocentsHarmed);
             this.Controls.Add(this.LB_InnocentsHarmed);
@@ -672,10 +654,7 @@
         private System.Windows.Forms.Label NB_InnocentsHarmed;
         private System.Windows.Forms.Label LB_InnocentsHarmed;
         private System.Windows.Forms.Label LB_SilentAssassin;
-        private System.Windows.Forms.Panel IMG_SA;
         private System.Windows.Forms.MenuStrip MainMenu;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem Menu_Update;
         private System.Windows.Forms.ToolStripMenuItem Menu_About;
         private System.Windows.Forms.Label NB_Item15;
@@ -696,6 +675,7 @@
         private System.Windows.Forms.Label LB_Item8;
         private System.Windows.Forms.Label NB_Item16;
         private System.Windows.Forms.Label LB_Item16;
+        private System.Windows.Forms.Label NB_SilentAssassin;
     }
 }
 

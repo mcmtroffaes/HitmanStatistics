@@ -2,8 +2,6 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 
 namespace HitmanStatistics {
     public partial class FormMain : Form {
@@ -12,13 +10,11 @@ namespace HitmanStatistics {
         // State variables.
         int myHandle;
         IGame game;
-        bool? isSilentAssassin;  // keep track to avoid overwriting image which causes "glitch"
 
         public FormMain() {
             InitializeComponent();
             myHandle = 0;
             game = new GameHitman2SA();
-            isSilentAssassin = true;
         }
 
         private void Timer_Tick(object sender, EventArgs e) {
@@ -55,9 +51,20 @@ namespace HitmanStatistics {
                 Mission mission = game.Mission(myHandle);
                 if (mission != null)
                 {
-                    if (isSilentAssassin != mission.isSilentAssassin) {
-                        isSilentAssassin = mission.isSilentAssassin;
-                        UpdateSilentAssassinStatus();
+                    switch (mission.silentAssassin)
+                    {
+                        case 0:
+                            NB_SilentAssassin.Text = "✔";
+                            LB_SilentAssassin.ForeColor = Color.Green;
+                            break;
+                        case 1:
+                            NB_SilentAssassin.Text = "❓";
+                            LB_SilentAssassin.ForeColor = Color.DarkOrange;
+                            break;
+                        default:
+                            NB_SilentAssassin.Text = "❌";
+                            LB_SilentAssassin.ForeColor = Color.Red;
+                            break;
                     }
                     if (mission.name != "")
                     {
@@ -80,86 +87,62 @@ namespace HitmanStatistics {
             }
         }
 
-        private string StatisticsLabel(int index, string[] names, int[] statistics)
+        private string StatisticsLabel(int index, Tuple<string, Func<int, string>>[] names, int[] statistics)
         {
-            return (statistics != null && statistics.Length > index) ? names[index] : "";
+            return (statistics != null && statistics.Length > index) ? names[index].Item1 : "";
         }
 
-        private string StatisticsValue(int index, int[] statistics)
+        private string StatisticsValue(int index, Tuple<string, Func<int, string>>[] names, int[] statistics)
         {
-            return (statistics != null && statistics.Length > index) ? statistics[index].ToString() : "";
+            return (statistics != null && statistics.Length > index) ? names[index].Item2(statistics[index]) : "";
         }
 
-        private void UpdateStatistics(string[] names, int[] statistics)
+        private void UpdateStatistics(Tuple<string, Func<int, string>>[] names, int[] statistics)
         {
             LB_ShotsFired.Text = StatisticsLabel(0, names, statistics);
-            NB_ShotsFired.Text = StatisticsValue(0, statistics);
+            NB_ShotsFired.Text = StatisticsValue(0, names, statistics);
             LB_CloseEncounters.Text = StatisticsLabel(1, names, statistics);
-            NB_CloseEncounters.Text = StatisticsValue(1, statistics);
+            NB_CloseEncounters.Text = StatisticsValue(1, names, statistics);
             LB_Headshots.Text = StatisticsLabel(2, names, statistics);
-            NB_Headshots.Text = StatisticsValue(2, statistics);
+            NB_Headshots.Text = StatisticsValue(2, names, statistics);
             LB_Alerts.Text = StatisticsLabel(3, names, statistics);
-            NB_Alerts.Text = StatisticsValue(3, statistics);
+            NB_Alerts.Text = StatisticsValue(3, names, statistics);
             LB_EnemiesKilled.Text = StatisticsLabel(4, names, statistics); 
-            NB_EnemiesKilled.Text = StatisticsValue(4, statistics);
+            NB_EnemiesKilled.Text = StatisticsValue(4, names, statistics);
             LB_EnemiesHarmed.Text = StatisticsLabel(5, names, statistics); 
-            NB_EnemiesHarmed.Text = StatisticsValue(5, statistics);
+            NB_EnemiesHarmed.Text = StatisticsValue(5, names, statistics);
             LB_InnocentsKilled.Text = StatisticsLabel(6, names, statistics); 
-            NB_InnocentsKilled.Text = StatisticsValue(6,statistics);
+            NB_InnocentsKilled.Text = StatisticsValue(6, names, statistics);
             LB_InnocentsHarmed.Text = StatisticsLabel(7, names, statistics);
-            NB_InnocentsHarmed.Text = StatisticsValue(7, statistics);
+            NB_InnocentsHarmed.Text = StatisticsValue(7, names, statistics);
             LB_Item8.Text = StatisticsLabel(8, names, statistics);
-            NB_Item8.Text = StatisticsValue(8, statistics);
+            NB_Item8.Text = StatisticsValue(8, names, statistics);
             LB_Item9.Text = StatisticsLabel(9, names, statistics);
-            NB_Item9.Text = StatisticsValue(9, statistics);
+            NB_Item9.Text = StatisticsValue(9, names, statistics);
             LB_Item10.Text = StatisticsLabel(10, names, statistics);
-            NB_Item10.Text = StatisticsValue(10, statistics);
+            NB_Item10.Text = StatisticsValue(10, names, statistics);
             LB_Item11.Text = StatisticsLabel(11, names, statistics);
-            NB_Item11.Text = StatisticsValue(11, statistics);
+            NB_Item11.Text = StatisticsValue(11, names, statistics);
             LB_Item12.Text = StatisticsLabel(12, names, statistics);
-            NB_Item12.Text = StatisticsValue(12, statistics);
+            NB_Item12.Text = StatisticsValue(12, names, statistics);
             LB_Item13.Text = StatisticsLabel(13, names, statistics);
-            NB_Item13.Text = StatisticsValue(13, statistics);
+            NB_Item13.Text = StatisticsValue(13, names, statistics);
             LB_Item14.Text = StatisticsLabel(14, names, statistics);
-            NB_Item14.Text = StatisticsValue(14, statistics);
+            NB_Item14.Text = StatisticsValue(14, names, statistics);
             LB_Item15.Text = StatisticsLabel(15, names, statistics);
-            NB_Item15.Text = StatisticsValue(15, statistics);
+            NB_Item15.Text = StatisticsValue(15, names, statistics);
             LB_Item16.Text = StatisticsLabel(16, names, statistics);
-            NB_Item16.Text = StatisticsValue(16, statistics);
+            NB_Item16.Text = StatisticsValue(16, names, statistics);
         }
 
-        private void UpdateSilentAssassinStatus()
-        {
-            if (isSilentAssassin.HasValue)
-            {
-                if (!isSilentAssassin.Value)
-                {
-                    IMG_SA.BackgroundImage = Properties.Resources.No;
-                    LB_SilentAssassin.Text = "Silent Assassin";
-                    LB_SilentAssassin.ForeColor = Color.Red;
-                }
-                else
-                {
-                    IMG_SA.BackgroundImage = Properties.Resources.Yes;
-                    LB_SilentAssassin.Text = "Silent Assassin";
-                    LB_SilentAssassin.ForeColor = Color.Green;
-                }
-            }
-            else
-            {
-                IMG_SA.BackgroundImage = null;
-                LB_SilentAssassin.Text = "";
-            }
-
-        }
 
         // Used to reset all the values
         private void ResetValues() {
             LB_MapName.Text = "No Mission Active";
             LB_Time.Text = "";
+            NB_SilentAssassin.Text = "✔";
+            LB_SilentAssassin.ForeColor = Color.Green;
             UpdateStatistics(null, null);
-            isSilentAssassin = null;
-            UpdateSilentAssassinStatus();
         }
 
         // Open a web page to the latest version of the tracker

@@ -81,17 +81,17 @@ public class GameHitmanContracts : IGame
         return "HitmanContracts";
     }
 
-    public string[] StatisticsNames()
+    public Tuple<string, Func<int, string>>[] StatisticsNames()
     {
-        return new string[] {
-            "Shots Fired",
-            "Close Encounters",
-            "Headshots",
-            "Alerts",
-            "Enemies Killed",
-            "Enemies Wounded",
-            "Innocents Killed",
-            "Innocents Wounded",
+        return new Tuple<string, Func<int, string>>[] {
+            Tuple.Create("Shots Fired", Utils.ValueToString),
+            Tuple.Create("Close Encounters", Utils.ValueToString),
+            Tuple.Create("Headshots", Utils.ValueToString),
+            Tuple.Create("Alerts", Utils.ValueToString),
+            Tuple.Create("Enemies Killed", Utils.ValueToString),
+            Tuple.Create("Enemies Wounded", Utils.ValueToString),
+            Tuple.Create("Innocents Killed", Utils.ValueToString),
+            Tuple.Create("Innocents Wounded", Utils.ValueToString),
         };
     }
 
@@ -130,7 +130,7 @@ public class GameHitmanContracts : IGame
                         ? validSACombination.Any(combination => IsLessOrEqualTo(stats, combination))
                         : validSACombinationMap1.Any(combination => IsLessOrEqualTo(stats, combination));
                     Logger.Log($"silent assassin: {isSilentAssassin}");
-                    return new Mission(mapNumber, mapName, missionTime, stats, isSilentAssassin);
+                    return new Mission(mapNumber, mapName, missionTime, stats, isSilentAssassin ? 0 : 2);
                 }
             }
             else

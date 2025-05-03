@@ -75,17 +75,17 @@ public class GameHitman2SA : IGame
         return "hitman2";
     }
 
-    public string[] StatisticsNames()
+    public Tuple<string, Func<int, string>>[] StatisticsNames()
     {
-        return new string[] {
-            "Shots Fired",
-            "Close Encounters",
-            "Headshots",
-            "Alerts",
-            "Enemies Killed",
-            "Enemies Wounded",
-            "Innocents Killed",
-            "Innocents Wounded",
+        return new Tuple<string, Func<int, string>>[] {
+            Tuple.Create("Shots Fired", Utils.ValueToString),
+            Tuple.Create("Close Encounters", Utils.ValueToString),
+            Tuple.Create("Headshots", Utils.ValueToString),
+            Tuple.Create("Alerts", Utils.ValueToString),
+            Tuple.Create("Enemies Killed", Utils.ValueToString),
+            Tuple.Create("Enemies Wounded", Utils.ValueToString),
+            Tuple.Create("Innocents Killed", Utils.ValueToString),
+            Tuple.Create("Innocents Wounded", Utils.ValueToString),
         };
     }
 
@@ -122,7 +122,7 @@ public class GameHitman2SA : IGame
                     Logger.Log($"stats: {stats}");
                     bool isSilentAssassin = validSACombination.Any(combination => IsLessOrEqualTo(stats, combination));
                     Logger.Log($"silent assassin: {isSilentAssassin}");
-                    return new Mission(mapNumber, mapName, missionTime / 60.0F, stats, isSilentAssassin);
+                    return new Mission(mapNumber, mapName, missionTime / 60.0F, stats, isSilentAssassin ? 0 : 2);
                 }
             }
         }
