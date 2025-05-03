@@ -127,15 +127,15 @@ public class GameHitmanBloodMoney : IGame
             Tuple.Create("Enemies Wounded", Utils.ValueToString),
             Tuple.Create("Police Killed", Utils.ValueToString),
             Tuple.Create("Police Wounded", Utils.ValueToString),
-            Tuple.Create("Frisk Failed", Utils.ValueToString),
-            Tuple.Create("Cover Blown", Utils.ValueToString),
+            Tuple.Create("Frisk Failed", Utils.ValueToYesNo),
+            Tuple.Create("Cover Blown", Utils.ValueToYesNo),
             Tuple.Create("Bodies Found", Utils.ValueToString),
             Tuple.Create("Target Bodies Fnd", Utils.ValueToString),
             Tuple.Create("Uncon Bodies Fnd", Utils.ValueToString),
             Tuple.Create("Witnesses", Utils.ValueToString),
-            Tuple.Create("On Camera", Utils.ValueToString),
-            Tuple.Create("Weapons Left", Utils.ValueToString),
-            Tuple.Create("Suit Left",  Utils.ValueToString)
+            Tuple.Create("On Camera", Utils.ValueToYesNo),
+            Tuple.Create("Cust Weapons Left", Utils.ValueToYesNo),
+            Tuple.Create("Suit Left",  Utils.ValueToYesNo)
         };
     }
 
