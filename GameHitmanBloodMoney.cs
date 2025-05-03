@@ -192,7 +192,6 @@ public class GameHitmanBloodMoney : IGame
             || stats[indexBodiesFound] != 0
             || (stats[indexDifficulty] > 1 && stats[indexTargetBodiesFound] != 0)
             || stats[indexUnconsciousBodiesFound] != 0
-            || stats[indexWitnesses] != 0
-        ) ? 2 : items_left_on_map || (stats[indexCaughtOnCamera] != 0) ? 1 : 0;
+        ) ? 2 : items_left_on_map || (stats[indexWitnesses] != 0) || (stats[indexCaughtOnCamera] != 0) ? 1 : 0;
     }
 }
