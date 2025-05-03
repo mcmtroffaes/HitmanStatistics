@@ -54,16 +54,19 @@ namespace HitmanStatistics {
                     switch (mission.silentAssassin)
                     {
                         case 0:
-                            NB_SilentAssassin.Text = "✔";
                             LB_SilentAssassin.ForeColor = Color.Green;
+                            NB_SilentAssassin.Text = "✔";
+                            NB_SilentAssassin.ForeColor = Color.Green;
                             break;
                         case 1:
-                            NB_SilentAssassin.Text = "❓";
                             LB_SilentAssassin.ForeColor = Color.DarkOrange;
+                            NB_SilentAssassin.Text = "❓";
+                            NB_SilentAssassin.ForeColor = Color.DarkOrange;
                             break;
                         default:
-                            NB_SilentAssassin.Text = "❌";
                             LB_SilentAssassin.ForeColor = Color.Red;
+                            NB_SilentAssassin.Text = "❌";
+                            NB_SilentAssassin.ForeColor = Color.Red;
                             break;
                     }
                     if (mission.name != "")
@@ -140,8 +143,9 @@ namespace HitmanStatistics {
         private void ResetValues() {
             LB_MapName.Text = "No Mission Active";
             LB_Time.Text = "";
-            NB_SilentAssassin.Text = "✔";
             LB_SilentAssassin.ForeColor = Color.Green;
+            NB_SilentAssassin.Text = "✔";
+            NB_SilentAssassin.ForeColor = Color.Green;
             UpdateStatistics(null, null);
         }
 
