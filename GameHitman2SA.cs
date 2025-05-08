@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public class GameHitman2SA : IGame
@@ -110,7 +110,7 @@ public class GameHitman2SA : IGame
                 {
                     int mapSecondOffset = secondOffset[mapNumber - 1];
                     int[] stats = new int[] {
-                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x03981C, new int[3] { 0x12C, 0x8C, 0x11C7 }),  // note: mostly works, but sometimes briefly glitches out
+                        Trainer.ReadPointerInteger(Handle, baseAddress + 0x092894, new int[3] { 0x2E0, 0x4, 0x11C7 }),
                         Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x220 }),
                         Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x208 }),
                         Trainer.ReadPointerInteger(Handle, baseAddress + 0x2A6C50, new int[3] { 0x28, mapSecondOffset, 0x21C }),
@@ -129,7 +129,8 @@ public class GameHitman2SA : IGame
         return null;
     }
 
-    private bool IsLessOrEqualTo(int[] stats1, int[] stats2) {
+    private bool IsLessOrEqualTo(int[] stats1, int[] stats2)
+    {
         return stats1.Zip(stats2, (v1, v2) => v1 <= v2).All(x => x);
     }
 }
